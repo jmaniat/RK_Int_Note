@@ -13,37 +13,55 @@
 % Comment or remove in final version.
 \AtlasVersion{0.1}
 
-% Abstract - % directly after { is important for correct indentation
+% Abstract - % directly after { is important for correct indentation.
 \AtlasAbstract{%
-This note summarizes a measurement of the lepton flavour universality using the ratio of the branching fractions of the $B_d^0 \rightarrow K^* e^+e^-$ and $B_d^0 \rightarrow K^* \mu^+\mu^-$, $R(K^*)$, in LHC $pp$ collision data recorded by the ATLAS detector at $\sqrt{s}=13$~TeV in 2018.
+  This note summarizes a measurement of the lepton flavour universality
+  using the ratio of the branching fractions of the $B_d^0 \rightarrow K^* e^+e^-$
+  and $B_d^0 \rightarrow K^* \mu^+\mu^-$, $R(K^*)$, in LHC $pp$ collision
+  data recorded by the ATLAS detector at $\sqrt{s}=13$~TeV in 2018.
 }
 
 % Author - this does not work with revtex (add it after \begin{document})
-% \author{The ATLAS Collaboration}
+%\author{The ATLAS Collaboration}
 
-% Authors and list of contributors to the analysis
-% \AtlasAuthorContributor also adds the name to the author list
-% Include package latex/atlascontribute to use this
-% Use authblk package if there are multiple authors, which is included by latex/atlascontribute
+% Authors and list of contributors to the analysis.
+% \AtlasAuthorContributor also adds the name to the author list.
+% Include package latex/atlascontribute to use this.
+% Use authblk package if there are multiple authors, which is included by latex/atlascontribute.
 % \usepackage{authblk}
-% Use the following 3 lines to have all institutes on one line
+% Use the following 3 lines to have all institutes on one line.
 % \makeatletter
 % \renewcommand\AB@affilsepx{, \protect\Affilfont}
 % \makeatother
 % \renewcommand\Authands{, } % avoid ``. and'' for last author
 % \renewcommand\Affilfont{\itshape\small} % affiliation formatting
+% \AtlasAuthorContributor{First AtlasAuthorContributor}{a}{Author's contribution.}
+% \AtlasAuthorContributor{Second AtlasAuthorContributor}{b}{Author's contribution.}
+% \AtlasAuthorContributor{Third AtlasAuthorContributor}{a}{Author's contribution.}
+% \AtlasContributor{Fourth AtlasContributor}{Contribution to the analysis.}
+% \author[a]{First Author}
+% \author[a]{Second Author}
+% \author[b]{Third Author}
+% \affil[a]{One Institution}
+% \affil[b]{Another Institution}
+
 \AtlasAuthorContributor{Biros, Marek}{a}{$\mu\mu$ data preparation (ntuple)}
-\AtlasAuthorContributor{Bona, Marcella}{b}{General analysis strategies}
+\AtlasAuthorContributor{Bona, Marcella}{b}{General analysis strategies; mass fits; supervision of Nathan Heatley}
+\AtlasAuthorContributor{Heatley, Nathan}{b}{Selection studies; mass fits}
 \AtlasAuthorContributor{Hod, Noam}{c}{General analysis strategies; BeeX trigger efficiency studies; ML analysis; supervision of Dvij Mankad}
 \AtlasAuthorContributor{Igonkina, Olga}{d}{Former analysis contact; BeeX trigger development and studies; MC preparation}
-\AtlasAuthorContributor{Jakoubek, Tomas}{c}{Analysis contact; analysis framework; $ee$ data preparation (DAOD, ntuple), derivation update; ML analysis; fit code}
+\AtlasAuthorContributor{Jakoubek, Tomas}{c}{Analysis contact; analysis framework;
+  $ee$ data preparation (DAOD, ntuple), derivation update; ML analysis; fit code}
 \AtlasAuthorContributor{Mankad, Dvij Chaitanya}{c}{BeeX trigger efficiency studies; ML analysis}
-\AtlasAuthorContributor{Perrevoort, Ann-Kathrin}{d}{Analysis contact; consultancy for neural network, and general analysis strategies; MC preparation; analysis framework; $ee$ data preparation (ntuple)}
+\AtlasAuthorContributor{Perrevoort, Ann-Kathrin}{d}{Analysis contact; consultancy for neural network,
+  and general analysis strategies; MC preparation; analysis framework; $ee$ data preparation (ntuple)}
 \AtlasAuthorContributor{Reznicek, Pavel}{a}{$\mu\mu$ data preparation (DAOD, ntuple); supervision of Marek Biros}
-\AtlasAuthorContributor{Russell, Heather Lynn}{e}{Former analysis contact; BeeX trigger development and studies; $ee$ derivation development and b-phys vertexing for electrons; L1 trigger studies; MC preparation}
-\AtlasAuthorContributor{Saha, Shreya}{f}{BeeX trigger development and studies; $ee$ derivation development and b-phys vertexing for electrons}
+\AtlasAuthorContributor{Russell, Heather Lynn}{e}{Former analysis contact; BeeX trigger development and studies;
+  $ee$ derivation development and b-phys vertexing for electrons; L1 trigger studies; MC preparation}
+\AtlasAuthorContributor{Saha, Shreya}{f}{BeeX trigger development and studies; $ee$ derivation
+  development and b-phys vertexing for electrons}
 \AtlasAuthorContributor{Sinetckii, Viktor}{g}{$\mu\mu$ data preparation (DAOD)}
-\AtlasAuthorContributor{Walder, James}{h}{Consultancy for general analysis strategies} 
+%\AtlasAuthorContributor{Walder, James}{h}{Consultancy for general analysis strategies} 
 \affil[a]{Charles University, Faculty of Mathematics and Physics, Prague}
 \affil[b]{Queen Mary University of London}
 \affil[c]{Department of Particle Physics and Astrophysics, The Weizmann Institute of Science}
@@ -51,7 +69,9 @@ This note summarizes a measurement of the lepton flavour universality using the 
 \affil[e]{European Laboratory for Particle Physics, CERN}
 \affil[f]{McGill University, Department of Physics}
 \affil[g]{M.V.Lomonosov Moscow State University}
-\affil[h]{Rutherford Appleton Laboratory}
+%\affil[h]{Rutherford Appleton Laboratory}
+
+
 
 % If a special author list should be indicated via a link use the following code:
 % Include the two lines below if you do not use atlasstyle:
@@ -61,11 +81,14 @@ This note summarizes a measurement of the lepton flavour universality using the 
 % \usepackage{authblk}
 % \author{The ATLAS Collaboration%
 % \thanks{The full author list can be found at:\newline
-%   \url{https://atlas.web.cern.ch/Atlas/PUBNOTES/ATL-PHYS-PUB-2016-007/authorlist.pdf}}
+%   \url{https://atlas.web.cern.ch/Atlas/PUBNOTES/ATL-PHYS-PUB-2021-XXX/authorlist.pdf}}
 % }
 
-% ATLAS reference code, to help ATLAS members to locate the paper
-\AtlasRefCode{ANA-BPHY-2019-16}
+% ATLAS reference code, to help ATLAS members to locate the paper.
+\AtlasRefCode{BPHY-2019-16}
 
-% ATLAS note number. Can be an COM, INT, PUB or CONF note
+% ATLAS note number. Can be an COM, INT, PUB or CONF note.
 \AtlasNote{ANA-BPHY-2019-16-INT1}
+% \AtlasNote{ATLAS-CONF-2021-XXX}
+% \AtlasNote{ATL-PHYS-PUB-2021-XXX}
+% \AtlasNote{ATL-COM-PHYS-2021-XXX}
