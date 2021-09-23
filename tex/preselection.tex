@@ -5,22 +5,23 @@ We use release XX.XX to process the data.
 The preselection software can be found in the package XX.
 %The post-Athena processing code can be found in the ntuple subdirectory of the package.
 
-In the Athena reconstruction, as a first step a JpsiFinder tool is run on XXX (type of muons?)
-muon container, searching for di-muon candidates with opposite sign and invariant mass
-in the range [0, 5500 ???] \mev.
-Di-muon candidates are considered if the vertex $\chisqr$ per degree of freedom is $\chisqr < 20$ ??. 
+In the Athena reconstruction, as a first step a JpsiFinder tool is run on muon or electron
+containers, searching for di-lepton candidates with opposite sign and invariant mass
+in the range [0, 5700 ??] \mev. %The \pt of the Leptons is required to be $\gt 4$ \gev [??].
+Di-lepton candidates are considered if the vertex $\chisqr$ per degree of freedom is
+$\chisqr < 20$ ??.
 
-\Bd candidates are then formed by BCompositeParticleBuilder tool from two tracks associated
-with muons with $\pt > 500$ \mev and two other opposite-signed tracks not identified as muons
-(i.e. hadrons from $K^*$ candidates). These 4 tracks are fitted into \Bd vertex with track
-mass hypotheses set for \Bd and \Bdb (kaon mass assigned to positive or negative track).
-Secondary \Bd and \kstar vertices are re-fitted using TrkVKalVrtFitter, primary vertices
+\Bd candidates are then formed by BCompositeParticleBuilder [??] tool from two tracks associated
+with leptons with $\pt > 500$ [??] \mev and two other opposite-signed tracks not identified as muons
+or electrons (i.e. hadrons from $K^*$ candidates). These 4 tracks are fitted into \Bd vertex
+with track mass hypotheses set for \Bd and \Bdb (kaon mass assigned to positive or negative track).
+Secondary \Bd and \kstar vertices are re-fitted using TrkVKalVrtFitter [???], primary vertices
 are refitted without the 4 candidate tracks and additional cuts are applied: 
 %{\red Q) What type of fit is performed and are there any constraints used in the fit?}
 \begin{itemize}
- \item \Bd vertex $\chisqr < 15$, 
- \item \Bd mass in the range [4600, 6000] \mev,
- \item \kstar mass in the range [600, 1050] \mev. 
+ \item \Bd vertex $\chisqr < 15$, [??]
+ \item \Bd mass in the range [4600, 6000] \mev, [??]
+ \item \kstar mass in the range [600, 1050] \mev. [??]
 \end{itemize}
 
 Events are saved in a linked per-event tree with one \kstar candidate for each \Bd candidate.
@@ -31,7 +32,15 @@ For the reconstruction of primary vertex (PV), the PV of the \Bd candidate is ch
 the one with the smallest distance in $z$ along the beam axis with respect to the reconstructed
 4-momentum of the \Bd.
 
-At this stage there are multiple candidates per event, and the information is split across
-several trees.
-
+After the Athen reconstruction described above, a preselection is applied:
+\begin{itemize}
+ \item \pt(leptons)$\geq 4$~\gev
+ \item $|\eta|$(leptons)$\leq 2.5$
+ \item \pt(hadrons)$\geq 1$\gev
+ \item $|\eta|$(hadrons)$\leq 2.5$
+ \item \Bd$(\chisqr) \leq 2$
+ \item $\tau$(\Bd)$\geq 0.2$~ps
+ \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
+ \item $m(B_d^0) \in [4700,5700]$~\mev
+\end{itemize}
 
