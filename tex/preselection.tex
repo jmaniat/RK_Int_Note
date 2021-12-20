@@ -7,40 +7,155 @@ The preselection software can be found in the package XX.
 
 In the Athena reconstruction, as a first step a JpsiFinder tool is run on muon or electron
 containers, searching for di-lepton candidates with opposite sign and invariant mass
-in the range [0, 5700 ??] \mev. %The \pt of the Leptons is required to be $\gt 4$ \gev [??].
-Di-lepton candidates are considered if the vertex $\chisqr$ per degree of freedom is
-$\chisqr < 20$ ??.
+in the range [0, 6000] \mev. The \pt of the Leptons is required to be $> 2$ \gev.
+%Di-lepton candidates are considered if the vertex $\chisqr$ per degree of freedom is
+%$\chisqr < 30$.
 
 \Bd candidates are then formed by BCompositeParticleBuilder [??] tool from two tracks associated
 with leptons with $\pt > 500$ [??] \mev and two other opposite-signed tracks not identified as muons
-or electrons (i.e. hadrons from $K^*$ candidates). These 4 tracks are fitted into \Bd vertex
+or electrons (i.e. hadrons from $K^*$ candidates). These four tracks are fitted into \Bd vertex
 with track mass hypotheses set for \Bd and \Bdb (kaon mass assigned to positive or negative track).
 Secondary \Bd and \kstar vertices are re-fitted using TrkVKalVrtFitter [???], primary vertices
-are refitted without the 4 candidate tracks and additional cuts are applied: 
+are refitted without the four candidate tracks and additional cuts are applied: 
 %{\red Q) What type of fit is performed and are there any constraints used in the fit?}
 \begin{itemize}
- \item \Bd vertex $\chisqr < 15$, [??]
- \item \Bd mass in the range [4600, 6000] \mev, [??]
- \item \kstar mass in the range [600, 1050] \mev. [??]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}%
+ \item \Bd or \Bdb vertex $\chisqr < 205$, [??]
+ \item \Bd or \Bdb mass in the range [3000, 6000] \mev, [??]
+ \item \kstar or \akstar mass in the range [600, 1050] \mev. [??]
 \end{itemize}
 
-Events are saved in a linked per-event tree with one \kstar candidate for each \Bd candidate.
-Both possible $K^\pm\pi^\pm$ assignments are considered when dealing with combinatorics and
+Events are saved in a linked per-event tree with one \kstar/\akstar\ candidate for each \Bd candidate:
+both possible $K^\pm\pi^\pm$ assignments are considered when dealing with combinatorics and
 this results in multiple candidates per event.
 
 For the reconstruction of primary vertex (PV), the PV of the \Bd candidate is chosen to be
-the one with the smallest distance in $z$ along the beam axis with respect to the reconstructed
-4-momentum of the \Bd.
+the one closest to the reconstructed decay vertex of the \Bd or \Bdb candidate using the three-dimensional
+distance.
 
-After the Athen reconstruction described above, a preselection is applied:
+After the Athena reconstruction described above, a preselection is applied:
 \begin{itemize}
- \item \pt(leptons)$\geq 4$~\gev
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}%
+ \item \pt(leptons)$\geq 5$~\gev
  \item $|\eta|$(leptons)$\leq 2.5$
- \item \pt(hadrons)$\geq 1$\gev
+ \item \pt(hadrons)$\geq 1$~\gev
  \item $|\eta|$(hadrons)$\leq 2.5$
  \item \Bd$(\chisqr) \leq 2$
  \item $\tau$(\Bd)$\geq 0.2$~ps
  \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
- \item $m(B_d^0) \in [4700,5700]$~\mev
+ \item $m(B_d^0) \in [3000,5700]$~\mev
 \end{itemize}
+
+The cut flow from this preselection for signal events ($\Bd \to \kstar ee$) and resonance events
+($\Bd \to J/\psi(ee)\kstar$) are shown in Tables~\ref{tab:presel:sigele} and~\ref{tab:presel:resele}
+for the electron final state.
+
+\begin{table}[!ht] 
+\caption{Number of events surviving the pre-selection for the signal non-resonant sample for the electron final state.} 
+\centering 
+\hspace*{-1.cm}
+{\small
+\begin{tabular}{l | l l l l l l l l l } 
+\hline\hline
+Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
+criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
+          &             &        & candidates & events &          & (truth- & & efficiencies\\
+          &             &        &   &   &          & matched) & & \\        
+\hline
+   to     &    be       &  filled      &   &   &          & & & \\        
+\hline\hline
+\end{tabular} 
+}
+\label{tab:presel:sigele}
+\end{table}
+
+
+\begin{table}[!ht] 
+\caption{Number of events surviving the pre-selection for the reference resonant sample for the electron final state.} 
+\centering 
+\hspace*{-1.cm}
+{\small
+\begin{tabular}{l | l l l l l l l l l } 
+\hline\hline
+Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
+criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
+          &             &        & candidates & events &          & (truth- & & efficiencies\\
+          &             &        &   &   &          & matched) & & \\        
+\hline
+$\pT(\ell_1)>5$~GeV & 2515085 & 217958 & 156485 & 154886 &  &  &   0.711 &  \\
+$\pT(\ell_2)>5$~GeV & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
+$\eta(\ell_1)<2.5$ & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
+$\eta(\ell_2)<2.5$ & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
+$\pT(h_1)>1$~GeV & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
+$\pT(h_2)>1$~GeV & 913674 & 195110 & 121550 & 120286 &  0.895 &  0.777 &  0.617 &  0.868 \\
+$\eta(h_1)<2.5$ & 417361 & 153585 & 99455 & 98392 &  0.787 &  0.818 &  0.641 &  1.039 \\
+$\eta(h_2)<2.5$ & 416603 & 153460 & 99312 & 98252 &  0.999 &  0.999 &  0.640 &  0.999 \\
+$\chi^2(B)/$NDoF & 415912 & 153329 & 99192 & 98134 &  0.999 &  0.999 &  0.640 &  1.000 \\
+$\tau(B)>0.2$ & 286407 & 131015 & 88514 & 87592 &  0.854 &  0.893 &  0.669 &  1.045 \\
+$|\Delta m(\kstar)_\mathrm{PDG}| < 50$~MeV & 207721 & 109944 & 77542 & 76747 &  0.839 &  0.876 &  0.698 &  1.044 \\
+$m(B)\in [4.7,5.7]$~GeV & 59235 & 49955 & 29008 & 28765 &  0.454 &  0.375 &  0.576 &  0.825 \\
+not sure & 43969 & 40179 & 26654 & 26447 &  0.804 &  0.919 &  0.658 &  1.143 \\
+not sure & 59689 & 50276 & 29148 & 28868 &  0.457 &  0.376 &  0.574 &  0.823 \\
+not sure & 44390 & 40545 & 26724 & 26473 &  0.806 &  0.917 &  0.653 &  1.137 \\
+not sure & 64742 & 64742 & 51785 & 51785 &  1.597 &  1.956 &  0.800 &  1.225 \\
+\hline\hline
+\end{tabular} 
+}
+\label{tab:presel:resele}
+\end{table}
+
+
+The cut flow from this preselection for signal events ($\Bd \to \kstar \mu\mu$) and resonance events
+($\Bd \to J/\psi(\mu\mu)\kstar$) are shown in Tables~\ref{tab:presel:sigmu} and~\ref{tab:presel:resmu}
+for the muon final states.
+
+\begin{table}[!ht] 
+\caption{Number of events surviving the pre-selection for the signal non-resonant sample for the muon final state.} 
+\centering 
+\hspace*{-1.cm}
+{\small
+\begin{tabular}{l | l l l l l l l l l } 
+\hline\hline
+Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
+criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
+          &             &        & candidates & events &          & (truth- & & efficiencies\\
+          &             &        &   &   &          & matched) & & \\        
+\hline
+   to     &    be       &  filled      &   &   &          & & & \\        
+\hline\hline
+\end{tabular} 
+}
+\label{tab:presel:sigmu}
+\end{table}
+
+
+\begin{table}[!ht] 
+\caption{Number of events surviving the pre-selection for the reference resonant sample for the muon final state.} 
+\centering 
+\hspace*{-1.cm}
+{\small
+\begin{tabular}{l | l l l l l l l l l } 
+\hline\hline
+Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
+criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
+          &             &        & candidates & events &          & (truth- & & efficiencies\\
+          &             &        &   &   &          & matched) & & \\        
+\hline
+   to     &    be       &  filled      &   &   &          & & & \\        
+\hline\hline
+\end{tabular} 
+}
+\label{tab:presel:resmu}
+\end{table}
+
+
+The percentage of multiple candidates after the preselection is about XX\% (XX\%)
+for signal (resonance) simulated events.
+
+
+
+
+
 
