@@ -63,7 +63,7 @@
 
 % Files with references for use with biblatex.
 % Note that biber gives an error if it finds empty bib files.
-% \addbibresource{atlas-document.bib}
+%\addbibresource{ANA-BPHY-2019-16-INT1.bib}
 \addbibresource{bib/ATLAS.bib}
 \addbibresource{bib/CMS.bib}
 \addbibresource{bib/ConfNotes.bib}
@@ -137,6 +137,14 @@
 
 
 %-------------------------------------------------------------------------------
+\section{Background Components}
+\label{sec:background}
+%-------------------------------------------------------------------------------
+
+\input{tex/background.tex}
+
+
+%-------------------------------------------------------------------------------
 \section{Results}
 \label{sec:result}
 %-------------------------------------------------------------------------------
@@ -159,8 +167,8 @@ Place your conclusion here.
 % just say \printbibliography here.
 \printbibliography
 % If you want to use the traditional BibTeX you need to use the syntax below.
-% \bibliographystyle{obsolete/bst/atlasBibStyleWithTitle}
-% \bibliography{atlas-document,bib/ATLAS,bib/CMS,bib/ConfNotes,bib/PubNotes}
+%\bibliographystyle{obsolete/bst/atlasBibStyleWithTitle}
+%\bibliography{atlas-document,bib/ATLAS,bib/CMS,bib/ConfNotes,bib/PubNotes}
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -181,6 +189,9 @@ The list should be printed either here or before the Table of Contents.
 %-------------------------------------------------------------------------------
 
 \section{Extra information on simulated and data samples}
+\label{sec:app:data}
+%-------------------------------------------------------------------------------
+
 \input{tex/app-data.tex}
 
 \end{document}
