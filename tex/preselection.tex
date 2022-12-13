@@ -34,24 +34,44 @@ For the reconstruction of primary vertex (PV), the PV of the \Bd candidate is ch
 the one closest to the reconstructed decay vertex of the \Bd or \Bdb candidate using the three-dimensional
 distance.
 
-After the Athena reconstruction described above, a preselection is applied:
+After the Athena reconstruction described above, a preselection is applied as follows:
 \begin{itemize}
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}%
  \item opposite charged lepton pairs and hadron pairs
- \item $\Delta R_{ee} \geq 0.1$
- \item \pt(leptons)$\geq 5$~\gev
- \item $|\eta|$(leptons)$\leq 2.5$
+ \item $\Delta R_{\ell\ell} \geq 0.1$
+ \item {\color{blue}\pt(e)$\geq 5$~\gev }/{\color{red} \pt($\mu$)$\geq 6$~\gev}
+ \item $|\eta|(\ell)\leq 2.5$
  \item \pt(hadrons)$\geq 0.5$~\gev
  \item $|\eta|$(hadrons)$\leq 2.5$
- \item $m(ee)\leq 7$~\gev
- \item $m(K\pi ee) \in [3000,6500]$~\mev
+ \item $m(\ell\ell)\leq 7$~\gev
+ \item $m(K\pi \ell\ell) \in [3000,6500]$~\mev
  \item $m(K\pi) \in [690, 1110]$~\mev
- \item Track Quality requirements on all four tracks and ID requirements on electrons
+ \item Track Quality requirements on all four tracks and ID requirements on electrons/muons?
 % \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
 %\item \Bd$(\chisqr) \leq 2$
 %\item $\tau$(\Bd)$\geq 0.2$~ps
 \end{itemize}
+
+
+%The preselection on the muon final states is as follows:
+%\begin{itemize}
+%\setlength{\itemsep}{0pt}%
+%\setlength{\parskip}{0pt}%
+% \item opposite charged lepton pairs and hadron pairs
+% \item $\Delta R_{ee} \geq 0.1$
+% \item \pt(e)$\geq 5$~\gev
+% \item $|\eta|$(e)$\leq 2.5$
+% \item \pt(hadrons)$\geq 0.5$~\gev
+% \item $|\eta|$(hadrons)$\leq 2.5$
+% \item $m(ee)\leq 7$~\gev
+% \item $m(K\pi ee) \in [3000,6500]$~\mev
+% \item $m(K\pi) \in [690, 1110]$~\mev
+% \item Track Quality requirements on all four tracks and ID requirements on electrons
+%% \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
+%%\item \Bd$(\chisqr) \leq 2$
+%%\item $\tau$(\Bd)$\geq 0.2$~ps
+%\end{itemize}
 
 The cut flow from this preselection for signal events ($\Bd \to \kstar ee$) and resonance events
 ($\Bd \to J/\psi(ee)\kstar$) are shown in Tables~\ref{tab:presel:sigele} and~\ref{tab:presel:resele}
@@ -62,7 +82,7 @@ for the electron final state.
 \centering 
 \hspace*{-1.cm}
 {\small
-\begin{tabular}{l | l l l l l l l l l } 
+\begin{tabular}{l | l l | l l | l l | l | l } 
 \hline\hline
 Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
 criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
@@ -82,32 +102,30 @@ criterion & Candidates  & Events & matched & matched & efficiency & efficiency &
 \centering 
 \hspace*{-1.cm}
 {\small
-\begin{tabular}{l | l l l l l l l l l } 
+\begin{tabular}{l | l l | l l | l l | l | l } 
 \hline\hline
 Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
 criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
           &             &        & candidates & events &          & (truth- & & efficiencies\\
           &             &        &   &   &          & matched) & & \\        
 \hline
-baseline & 2515085 & 217958 & 156485 & 154886 &  &  &   0.711 &  \\
-$\pT(\ell_1)>5$~GeV & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
-$\pT(\ell_2)>5$~GeV & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
-$\eta(\ell_1)<2.5$ & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
-$\eta(\ell_2)<2.5$ & 2515085 & 217958 & 156485 & 154886 &  1.000 &  1.000 &  0.711 &  1.000 \\
-$\pT(h_1)>1$~GeV & 913674 & 195110 & 121550 & 120286 &  0.895 &  0.777 &  0.617 &  0.868 \\
-$\pT(h_2)>1$~GeV & 417361 & 153585 & 99455 & 98392 &  0.787 &  0.818 &  0.641 &  1.039 \\
-$\eta(h_1)<2.5$ & 416603 & 153460 & 99312 & 98252 &  0.999 &  0.999 &  0.640 &  0.999 \\
-$\eta(h_2)<2.5$ & 415912 & 153329 & 99192 & 98134 &  0.999 &  0.999 &  0.640 &  1.000 \\
-$\chi^2(B)/$NDoF$<2$ & 286407 & 131015 & 88514 & 87592 &  0.854 &  0.893 &  0.669 &  1.045 \\
-$\tau(B)>0.2$ & 207721 & 109944 & 77542 & 76747 &  0.839 &  0.876 &  0.698 &  1.044 \\
+baseline                         & 2515085 & 217958 & 156485 & 154886 &  &  &   0.711 &  \\
+Q$(\ell_1)\cdot$Q$(\ell_2) = -1$ & 0       & 0      & 0      & 0      &  &  &         &  \\
+GSF-ID fix                       & 0       & 0      & 0      & 0      &  &  &         &  \\
+$\Delta(R_{\ell\ell})>0.1$~GeV   & 0       & 0      & 0      & 0      &  &  &         &  \\
+$\pT(\ell_{1,2})>5$~GeV          & 0       & 0      & 0      & 0      &  &  &         &  \\
+$|\eta(\ell_{1,2})|<2.5$         & 0       & 0      & 0      & 0      &  &  &         &  \\
+$\pT(h_{1,1})>0.5$~GeV           & 0       & 0      & 0      & 0      &  &  &         &  \\
+$|\eta(h_{1,2})|<2.5$            & 0       & 0      & 0      & 0      &  &  &         &  \\
+$m(\ell\ell)\leq 7$~GeV          & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline
-$|\Delta m(K\pi)_\mathrm{PDG}| < 50$~MeV & 59235 & 49955 & 29008 & 28765 &  0.454 &  0.375 &  0.576 &  0.825 \\
-$m(B)\in [4.7,5.7]$~GeV & 43969 & 40179 & 26654 & 26447 &  0.804 &  0.919 &  0.658 &  1.143 \\
+$m(K\pi\ell\ell)\in[3000,6500]$~MeV     & 0       & 0      & 0      & 0      &  &  &         &  \\
+$m(K\pi)\in[690,1100]$~MeV       & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline
-$|\Delta m(\pi K)_\mathrm{PDG}| < 50$~MeV & 59689 & 50276 & 29148 & 28868 &  0.457 &  0.376 &  0.574 &  0.823 \\
-$m(\overline{B})\in [4.7,5.7]$~GeV & 44390 & 40545 & 26724 & 26473 &  0.806 &  0.917 &  0.653 &  1.137 \\
+$m(\pi K\ell\ell)\in[3000,6500]$~MeV    & 0       & 0      & 0      & 0      &  &  &         &  \\
+$m(\pi K)\in[690,1100]$~MeV      & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline
-best $\chi^2(B)$ & 64742 & 64742 & 51785 & 51785 &  1.597 &  1.956 &  0.800 &  1.225 \\
+best $\chi^2(B)$                 & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline\hline
 \end{tabular} 
 }
@@ -124,7 +142,7 @@ for the muon final states.
 \centering 
 \hspace*{-1.cm}
 {\small
-\begin{tabular}{l | l l l l l l l l l } 
+\begin{tabular}{l | l l | l l | l l | l | l } 
 \hline\hline
 Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
 criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
@@ -144,7 +162,7 @@ criterion & Candidates  & Events & matched & matched & efficiency & efficiency &
 \centering 
 \hspace*{-1.cm}
 {\small
-\begin{tabular}{l | l l l l l l l l l } 
+\begin{tabular}{l | l l | l l | l l | l | l } 
 \hline\hline
 Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
 criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
