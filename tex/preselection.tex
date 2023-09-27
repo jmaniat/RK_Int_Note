@@ -11,11 +11,11 @@ in the range [0, 6000] \mev. The \pt of the Leptons is required to be $> 2$ \gev
 %Di-lepton candidates are considered if the vertex $\chisqr$ per degree of freedom is
 %$\chisqr < 30$.
 
-\Bd candidates are then formed by BCompositeParticleBuilder [??] tool from two tracks associated
-with leptons with $\pt > 500$ [??] \mev and two other opposite-signed tracks not identified as muons
+\Bd candidates are then formed (by BCompositeParticleBuilder [??] tool) from two tracks associated
+with leptons with $\pt > 500$~\mev and two other opposite-signed tracks not identified as muons
 or electrons (i.e. hadrons from $K^*$ candidates). These four tracks are fitted into \Bd vertex
 with track mass hypotheses set for \Bd and \Bdb (kaon mass assigned to positive or negative track).
-Secondary \Bd and \kstar vertices are re-fitted using TrkVKalVrtFitter [???], primary vertices
+Then secondary \Bd and \kstar vertices are fitted (using TrkVKalVrtFitter [???]), primary vertices
 are refitted without the four candidate tracks and additional cuts are applied: 
 %{\red Q) What type of fit is performed and are there any constraints used in the fit?}
 \begin{itemize}
@@ -26,11 +26,14 @@ are refitted without the four candidate tracks and additional cuts are applied:
  \item \kstar or \akstar mass in the range [600, 1050] \mev. [??]
 \end{itemize}
 
-Events are saved in a linked per-event tree with one \kstar/\akstar\ candidate for each \Bd candidate:
-both possible $K^\pm\pi^\pm$ assignments are considered when dealing with combinatorics and
-this results in multiple candidates per event.
+Events are saved in a linked per-event tree with one \kstar (\akstar) candidate for each \Bd (\Bdb) candidate.
+Both possible $K^\pm\pi^\pm$ assignments are considered given a set of four final state tracks, i.e. for each
+4-particle sets we normally can build both a \kstar and \akstar, hence this lead to two $B$ candidates, a \Bd
+and a \Bdb. Each of the two candidates needs to pass the specific mass cuts.
+In addition to two candidates per 4-particle sets, multiple sets of four final state particles can be formed.
+Both these cases result in multiple candidates per event.
 
-For the reconstruction of primary vertex (PV), the PV of the \Bd candidate is chosen to be
+For the reconstruction of primary vertex (PV), the PV of the $B$ candidate is chosen to be
 the one closest to the reconstructed decay vertex of the \Bd or \Bdb candidate using the three-dimensional
 distance.
 
@@ -47,11 +50,49 @@ After the Athena reconstruction described above, a preselection is applied as fo
  \item $m(\ell\ell)\leq 7$~\gev
  \item {\color{blue}$m(K\pi ee) \in [3000,6500]$~\mev} / {\color{red}$m(K\pi \mu\mu) \in [4700,6000]$~\mev}
  \item {\color{blue}$m(K\pi) \in [690, 1110]$~\mev} / {\color{red}$m(K\pi) \in [800, 1000]$~\mev}
- \item Track Quality requirements (Loose) on all four tracks and ID requirements on electrons (LooseElectron)
+ \item Track Quality requirements (Loose) on all four tracks
+ \item {\color{blue}ID requirements on electrons (LooseElectron)}
+ \item {\color{red}ID requirements on muons (???)}
 % \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
 %\item \Bd$(\chisqr) \leq 2$
 %\item $\tau$(\Bd)$\geq 0.2$~ps
 \end{itemize}
+
+Where the preselection differs between the muon and electron final state,
+the preselection criteria for muons are shown in red and the criteria for
+the electrons are shown in blue.
+
+Additionally, we can include two further stages of selection in order to
+obtain a single candidate per event, which can be useful for various tests.
+As mentioned above, each event consists of multiple \Bd~candidates, and each candidate has
+two possible mass hypotheses, i.e., whether an individual candidate corresponds to a \Bd or \Bdb.
+To select amongst different four-particle sets, the single best four-particle set per event is
+chosen based on the best $\chi^2$/Nd.o.f., referred to as the best-$\chi^2$ selection.
+
+After this latter selection, we can still have two candidates corresponding to the two
+hadron assigments ($K\pi$ and $\pi K$), Hence we can assign a single reconstructed mass to
+the selected four-track set choosing between the two mass hypotheses (as the switching of
+the $K$ and $\pi$ tracks lead to a change in the reconstructed $B$ mass).
+The assignment of the $B$ mass is done in two ways: a comparison to the $K^*$ mass PDG value
+is done and the closer of the two hypotheses is chosen, or in the gNN architecture,
+a multi-class gNN produces a classification score for each candidate as \Bd, \Bdb, and background
+and the highest of these is chosen.
+The former of these is referred to as the best-$K^*$ mass selection.
+
+The two additional selections above (the best-$\chi^2$ and the best-$K^*$ mass) are labelled
+the best-candidate selection in the following.
+
+A cutflow table is shown in Table~\ref{tab:presel:sigele} showing the number of candidates
+and events passing each stage of the preselection and also the best-candidate selection
+for the resonant $J/\psi\kstar$ MC sample.
+The same counts, where the candidate in question has been tagged as $\Bd \to J/\psi e^+e^-$
+using truth-level information (referred to as truth-matched), is also given.
+A truth-matched event is defined as one in which at least one candidate is truth-matched.
+The (truth-matched) relative efficiencies are then given, showing the fraction of (truth-matched)
+events that survive a given cut. Purity is defined as the fraction of events that have at least
+one truth-matched candidate at any given cut. Finally, the ratio of the relative efficiency
+to the truth-matched relative efficiency is also given, where a value above one indicates
+that a cut increases the signal purity and vice-versa.
 
 
 %The preselection on the muon final states is as follows:
@@ -126,7 +167,9 @@ $m(K\pi)\in[690,1100]$~MeV       & 0       & 0      & 0      & 0      &  &  &   
 $m(\pi K\ell\ell)\in[3000,6500]$~MeV    & 0       & 0      & 0      & 0      &  &  &         &  \\
 $m(\pi K)\in[690,1100]$~MeV      & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline
+preselected events               & 0       & 0      & 0      & 0      &  &  &         &  \\
 best $\chi^2(B)$                 & 0       & 0      & 0      & 0      &  &  &         &  \\
+best $K^*$ mass                  & 0       & 0      & 0      & 0      &  &  &         &  \\
 \hline\hline
 \end{tabular} 
 }
