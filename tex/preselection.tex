@@ -62,29 +62,13 @@ Where the preselection differs between the muon and electron final state,
 the preselection criteria for muons are shown in red and the criteria for
 the electrons are shown in blue.
 
-Additionally, we can include two further stages of selection in order to
-obtain a single candidate per event, which can be useful for various tests.
-As mentioned above, each event consists of multiple \Bd~candidates, and each candidate has
-two possible mass hypotheses, i.e., whether an individual candidate corresponds to a \Bd or \Bdb.
-To select amongst different four-particle sets, the single best four-particle set per event is
-chosen based on the best $\chi^2$/Nd.o.f., referred to as the best-$\chi^2$ selection.
-
-After the best-$\chi^2$ selection, we can still have two candidates corresponding to the two
-hadron assigments ($K\pi$ and $\pi K$), Hence we can assign a single reconstructed mass to
-the selected four-track set choosing between the two mass hypotheses (as the switching of
-the $K$ and $\pi$ tracks lead to a change in the reconstructed $B$ mass).
-The assignment of the $B$ mass is done in two ways: a comparison to the $K^*$ mass PDG value
-is done and the closer of the two hypotheses is chosen, or in the gNN architecture,
-a multi-class gNN produces a classification score for each candidate as \Bd, \Bdb, and background
-and the highest of these is chosen.
-The former of these is referred to as the best-$K^*$ mass selection.
-
-The two additional selections above (the best-$\chi^2$ and the best-$K^*$ mass) are labelled
-the best-candidate selection in the following.
+\input{tex/table_cutflow_electrons.tex}
+\input{tex/table_cutflow_muons.tex}
 
 The cut flows from this preselection for signal events ($\Bd \to \kstar ee$) and resonance events
 ($\Bd \to J/\psi(ee)\kstar$) are shown in Tables~\ref{tab:presel:sigele} and~\ref{tab:presel:resele}
-for the electron final state.
+for the electron final state and in Tables~\ref{tab:presel:sigmu} and~\ref{tab:presel:resmu}
+for the muon final state.
 These tables show the number of candidates and events passing each stage of the preselection
 and also the best-candidate selection for the MC samples.
 The truth-matched number of candidates/events are obtained by using truth-level information
@@ -96,7 +80,8 @@ truth-matched candidate at any given cut. Finally, the ratio of the relative eff
 to the truth-matched relative efficiency is also given, where a value above one indicates
 that a cut increases the signal purity and vice-versa.
 
-\input{tex/table_cutflow_electrons.tex}
+
+
 
 
 
