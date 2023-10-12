@@ -69,7 +69,7 @@ two possible mass hypotheses, i.e., whether an individual candidate corresponds 
 To select amongst different four-particle sets, the single best four-particle set per event is
 chosen based on the best $\chi^2$/Nd.o.f., referred to as the best-$\chi^2$ selection.
 
-After this latter selection, we can still have two candidates corresponding to the two
+After the best-$\chi^2$ selection, we can still have two candidates corresponding to the two
 hadron assigments ($K\pi$ and $\pi K$), Hence we can assign a single reconstructed mass to
 the selected four-track set choosing between the two mass hypotheses (as the switching of
 the $K$ and $\pi$ tracks lead to a change in the reconstructed $B$ mass).
@@ -82,143 +82,21 @@ The former of these is referred to as the best-$K^*$ mass selection.
 The two additional selections above (the best-$\chi^2$ and the best-$K^*$ mass) are labelled
 the best-candidate selection in the following.
 
-A cutflow table is shown in Table~\ref{tab:presel:sigele} showing the number of candidates
-and events passing each stage of the preselection and also the best-candidate selection
-for the resonant $J/\psi\kstar$ MC sample.
-The same counts, where the candidate in question has been tagged as $\Bd \to J/\psi e^+e^-$
-using truth-level information (referred to as truth-matched), is also given.
-A truth-matched event is defined as one in which at least one candidate is truth-matched.
+The cut flows from this preselection for signal events ($\Bd \to \kstar ee$) and resonance events
+($\Bd \to J/\psi(ee)\kstar$) are shown in Tables~\ref{tab:presel:sigele} and~\ref{tab:presel:resele}
+for the electron final state.
+These tables show the number of candidates and events passing each stage of the preselection
+and also the best-candidate selection for the MC samples.
+The truth-matched number of candidates/events are obtained by using truth-level information
+and a single candidate is matched to the truth candidate generated.
+%A truth-matched event is defined as one in which at least one candidate is truth-matched.
 The (truth-matched) relative efficiencies are then given, showing the fraction of (truth-matched)
-events that survive a given cut. Purity is defined as the fraction of events that have at least
-one truth-matched candidate at any given cut. Finally, the ratio of the relative efficiency
+events that survive a given cut. Purity is defined as the fraction of events that have a%t least one
+truth-matched candidate at any given cut. Finally, the ratio of the relative efficiency
 to the truth-matched relative efficiency is also given, where a value above one indicates
 that a cut increases the signal purity and vice-versa.
 
-
-%The preselection on the muon final states is as follows:
-%\begin{itemize}
-%\setlength{\itemsep}{0pt}%
-%\setlength{\parskip}{0pt}%
-% \item opposite charged lepton pairs and hadron pairs
-% \item $\Delta R_{ee} \geq 0.1$
-% \item \pt(e)$\geq 5$~\gev
-% \item $|\eta|$(e)$\leq 2.5$
-% \item \pt(hadrons)$\geq 0.5$~\gev
-% \item $|\eta|$(hadrons)$\leq 2.5$
-% \item $m(ee)\leq 7$~\gev
-% \item $m(K\pi ee) \in [3000,6500]$~\mev
-% \item $m(K\pi) \in [690, 1110]$~\mev
-% \item Track Quality requirements on all four tracks and ID requirements on electrons
-%% \item $|m(K\pi)-m(K^{0*})|\leq 50$~\mev
-%%\item \Bd$(\chisqr) \leq 2$
-%%\item $\tau$(\Bd)$\geq 0.2$~ps
-%\end{itemize}
-
-The cut flow from this preselection for signal events ($\Bd \to \kstar ee$) and resonance events
-($\Bd \to J/\psi(ee)\kstar$) are shown in Tables~\ref{tab:presel:sigele} and~\ref{tab:presel:resele}
-for the electron final state.
-
-\begin{table}[!ht] 
-\caption{Number of events surviving the pre-selection for the signal non-resonant sample for the electron final state.} 
-\centering 
-\hspace*{-1.cm}
-{\small
-\begin{tabular}{l | l l | l l | l l | l | l } 
-\hline\hline
-Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
-criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
-          &             &        & candidates & events &          & (truth- & & efficiencies\\
-          &             &        &   &   &          & matched) & & \\        
-\hline
-   to     &    be       &  filled      &   &   &          & & & \\        
-\hline\hline
-\end{tabular} 
-}
-\label{tab:presel:sigele}
-\end{table}
-
-
-\begin{table}[!ht] 
-\caption{Number of events surviving the pre-selection for the reference resonant sample for the electron final state.} 
-\centering 
-\hspace*{-1.cm}
-{\small
-\begin{tabular}{l | l l | l l | l l | l | l } 
-\hline\hline
-Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
-criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
-          &             &        & candidates & events &          & (truth- & & efficiencies\\
-          &             &        &   &   &          & matched) & & \\        
-\hline
-baseline                         & 2515085 & 217958 & 156485 & 154886 &  &  &   0.711 &  \\
-Track Quality \& ID requirements & 0       & 0      & 0      & 0      &  &  &         &  \\
-Q$(\ell_1)\cdot$Q$(\ell_2) = -1$ & 0       & 0      & 0      & 0      &  &  &         &  \\
-Q$(h_1)\cdot$Q$(h_2) = -1$       & 0       & 0      & 0      & 0      &  &  &         &  \\
-$\Delta(R_{\ell\ell})>0.1$~GeV   & 0       & 0      & 0      & 0      &  &  &         &  \\
-$\pT(\ell_{1,2})>5$~GeV          & 0       & 0      & 0      & 0      &  &  &         &  \\
-$|\eta(\ell_{1,2})|<2.5$         & 0       & 0      & 0      & 0      &  &  &         &  \\
-$\pT(h_{1,1})>0.5$~GeV           & 0       & 0      & 0      & 0      &  &  &         &  \\
-$|\eta(h_{1,2})|<2.5$            & 0       & 0      & 0      & 0      &  &  &         &  \\
-$m(\ell\ell)\leq 7$~GeV          & 0       & 0      & 0      & 0      &  &  &         &  \\
-\hline
-$m(K\pi\ell\ell)\in[3000,6500]$~MeV     & 0       & 0      & 0      & 0      &  &  &         &  \\
-$m(K\pi)\in[690,1100]$~MeV       & 0       & 0      & 0      & 0      &  &  &         &  \\
-\hline
-$m(\pi K\ell\ell)\in[3000,6500]$~MeV    & 0       & 0      & 0      & 0      &  &  &         &  \\
-$m(\pi K)\in[690,1100]$~MeV      & 0       & 0      & 0      & 0      &  &  &         &  \\
-\hline
-preselected events               & 0       & 0      & 0      & 0      &  &  &         &  \\
-best $\chi^2(B)$                 & 0       & 0      & 0      & 0      &  &  &         &  \\
-best $K^*$ mass                  & 0       & 0      & 0      & 0      &  &  &         &  \\
-\hline\hline
-\end{tabular} 
-}
-\label{tab:presel:resele}
-\end{table}
-
-
-The cut flow from this preselection for signal events ($\Bd \to \kstar \mu\mu$) and resonance events
-($\Bd \to J/\psi(\mu\mu)\kstar$) are shown in Tables~\ref{tab:presel:sigmu} and~\ref{tab:presel:resmu}
-for the muon final states.
-
-\begin{table}[!ht] 
-\caption{Number of events surviving the pre-selection for the signal non-resonant sample for the muon final state.} 
-\centering 
-\hspace*{-1.cm}
-{\small
-\begin{tabular}{l | l l | l l | l l | l | l } 
-\hline\hline
-Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
-criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
-          &             &        & candidates & events &          & (truth- & & efficiencies\\
-          &             &        &   &   &          & matched) & & \\        
-\hline
-   to     &    be       &  filled      &   &   &          & & & \\        
-\hline\hline
-\end{tabular} 
-}
-\label{tab:presel:sigmu}
-\end{table}
-
-
-\begin{table}[!ht] 
-\caption{Number of events surviving the pre-selection for the reference resonant sample for the muon final state.} 
-\centering 
-\hspace*{-1.cm}
-{\small
-\begin{tabular}{l | l l | l l | l l | l | l } 
-\hline\hline
-Selection &             &        & Truth- & Truth- & Relative & Relative &  &  Ratio of\\
-criterion & Candidates  & Events & matched & matched & efficiency & efficiency & Purity & relative \\
-          &             &        & candidates & events &          & (truth- & & efficiencies\\
-          &             &        &   &   &          & matched) & & \\        
-\hline
-   to     &    be       &  filled      &   &   &          & & & \\        
-\hline\hline
-\end{tabular} 
-}
-\label{tab:presel:resmu}
-\end{table}
+\input{tex/table_cutflow_electrons.tex}
 
 
 
