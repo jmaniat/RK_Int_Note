@@ -102,3 +102,43 @@ the Punzi significance does not correspond to a physically meaningful significan
 nor a sensitivity, instead, its maximum corresponds to a maximum sensitivity measurement,
 i.e. by maximising the Punzi significance of our CRS scan we maximise our sensitivity
 to the signal.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.5\textwidth]{figures/2DPunziOpt.png}
+    \caption{2D optimisation performed by scanning the Punzi significance of
+    $\cos \theta$ significance cuts, for a given cut on the $L_{\textrm{xy}}$ significance.}
+    \label{fig:2DCRSOpt}
+\end{figure}
+
+For choosing the second variable to be optimised, and with the idea of choosing the remaining
+variable which would exploit the most information about the data, the correlations between
+the CRS variables were calculated. These are shown in Fig \ref{fig:PunziScans}.
+Having chosen the $L_{\textrm{xy}}$ significance as the first variable in the 2D CRS optimisation,
+the second variable is the one with the smallest correlation coefficient with $L_{\textrm{xy}}$,
+which is seen to be the $\cos \theta$ significance.
+Finally, the 2D optimisation of the cuts in $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$
+was done by performing a grid search maximisation of the Punzi significance for pairs of cuts.
+Fig~\ref{fig:2DCRSOpt} shows the Punzi significance scan for a few slices of the grid search.
+Optimum cuts on $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$ were found
+to be $L_{\textrm{xy}}/\sigma_{L} >  15.8, \cos \theta/\sigma_{\cos \theta} > 0.016$.
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.4\textwidth]{figures/B_masses_cutflow_JPsi_highq2_datafit.png}
+    \includegraphics[width = 0.4\textwidth]{figures/BmassFit_Jpsi_Data_Highq2_CRS_extended_Bkgpdf_erfc_cores_free.png}
+    \caption{(Left) Extended likelihood fits to the invariant B mass, with only the preselection applied,
+    here signal is shown in blue and background in red. The fit results are also shown.
+    (Right) Extended likelihood fits to the invariant B mass, with the preselection and
+    additional CRS applied, here signal is shown in blue and background in red.
+    The fit results are also shown. }
+    \label{fig:CRSvsCutflowFits}
+\end{figure}
+
+The optimised CRS was then applied to the low-$q^{2}$ sideband data and also high-$q^{2}$ data
+to assess the effect of the optimised selection on the reduction of combinatorial background.
+For the high-$q^{2}$, this is particularly insightful as to the efficacy of the CRS,
+as we see the emergence of the $J/\psi$ mass peak from the overwhelming background.
+Fig.~\ref{fig:CRSvsCutflowFits} shows extended likelihood fits to the invariant B mass,
+with and without the CRS applied. As can be seen, the CRS gives us a much better handle
+on the functional form of the signal shape and allows us to safely factor
+in the contribution of the \lq B-like' backgrounds in the background.
