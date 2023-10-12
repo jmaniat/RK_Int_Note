@@ -2,3 +2,55 @@ While the main strategy for signal extraction uses Multivariate algorithms, but
 we have optimised a basic selection using standard discriminating variables
 that can be used for increasing the signal-over-background ratio for various studies.
 
+% - Description of the background
+The background is made up of two distinctly behaving components: combinatorial background
+and \lq B-like\rq\, background. The combinatorial background arises from the random
+combination of unrelated tracks in the detector. The \lq B-like\rq\, decays arise from
+similar decays involving B mesons, in which one or more of the final state particles
+are misidentified and so lead to the event being reconstructed as a $B_{d}^{0} \xrightarrow{} K^{*}e^{+}e^{-}$ event.
+One problem, however, is that the background events consist of an overwhelming combinatorial component,
+this component of the background is more trivially modelled than \lq B-like\rq\,background,
+than the and so obscures our ability to deal with this type of background event.
+
+% - Idea behind the CRS
+A Continuum Reduction Selection (CRS), which uses lifetime-related variables that can clean up
+the overwhelming combinatorial background, was then implemented. This allows us to study and
+produce the data-MC comparison plots. Furthermore, it may allow us to focus on the
+\lq B-like\rq\,background characterisation and modelling.
+
+% - The variables used in the CRS and their definitions
+In order for a variable to discriminate between signal-like and combinatorial decays,
+we want it to exploit the inherent difference between the decays, that signal-like decays
+correspond to real particles (whether misreconstructed or not). As such, we expect
+signal-like events to have a longer lifetime and larger values for other variables
+proportional to the lifetime. The variables considered in the CRS are:
+$\tau_{B}$ -- the lifetime of the B, $L_{\textrm{xy}}$ -- the displacement of the $J/\psi$
+vertex from the PV, projected onto the flight direction of the $J/\psi$
+in the transverse plane, and $\cos \theta$ -- the cosine of the angle between the vector
+joining the PV and SV, and the direction of flight of the B. The significance values
+(i.e. the variable divided by its error) of these variables are also considered in the
+optimisation of the CRS.
+
+% - CRS optimisration incl. fits
+To optimise our cuts, in order to most efficiently cut away combinatorial background
+without also removing the signal, we must define some efficiency. In this optimisation,
+the Punzi significance \cite{Punzi} was used, which has advantages over the traditional
+method of calculating the significance $Z = S/\sqrt{S+B}$, which is used for comparing
+an existing signal with the overall statistical uncertainty in the Poissonian event count.
+The Punzi significance is used when we are uncertain of the cross-section we should expect,
+which will inevitably be factored in when we want to give an estimate for the signal yield.
+For the $R(K^{*})$, the large uncertainties on the $b\Bar{b}$ cross-section make the use
+of the Punzi significance necessary. Instead of the signal yield, we optimise using the
+efficiency of the cut on signal. This efficiency is calculated from the percentage of
+the MC events passing a given cut. Explicitly, the Punzi significance is calculated as
+\begin{equation}
+    Z_{\textrm{Punzi}} = \frac{\epsilon(t)}{a/2 + \sqrt{B(t)}},
+    \label{eq:punzicalc}
+\end{equation}
+where $\epsilon(t)$ is the signal efficiency, $a$ the number of sigma deviations
+(corresponding to one-sided Gaussian test, at some significance $\alpha$),
+and $B(t)$ the number of background events passing the cut, at threshold $t$.
+This also allows us to optimise the cuts without knowing the form of the signal
+in the data \textit{a priori}, and to optimise our cuts on the blinded signal
+significance in the low-$q^{2}$ region.
+
