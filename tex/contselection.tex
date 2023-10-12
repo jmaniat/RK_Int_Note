@@ -54,3 +54,51 @@ This also allows us to optimise the cuts without knowing the form of the signal
 in the data \textit{a priori}, and to optimise our cuts on the blinded signal
 significance in the low-$q^{2}$ region.
 
+% - CRS applied plots
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/SidebandFit_CRSoptimisation.png}
+    \caption{A blinded extended-likelihood fit to the invariant B mass in the low-$q^{2}$ signal region.
+    Here the background shape is modelled by an exponential (combinatorial component) and a
+    wide Gaussian (\lq B-like' background component). Below the pulls for the fit are also
+    shown for the high-mass sideband.}
+    \label{fig:SBFitCRS}
+\end{figure}
+
+To perform the 2D optimisation of the CRS, two CRS variables needed to be chosen.
+These variables must have both good discriminating power between combinatorial
+and \lq signal-like' decays and also exploit the information about the data.
+To choose the first of the two variables, a significance scan was performed
+on each of the CRS variables and the Punzi significance calculated at each
+point in the scan (corresponding to varying the cut of each CRS variable).
+In calculating the Punzi significance, the $\epsilon(t)$ was calculated as
+the fraction of signal MC passing the cut, the value of $a$ was taken as 2,
+and the background was calculated from a fit to the blinded low-$q^{2}$
+sideband data. Here, assuming the sideband is a good approximation to the background,
+we can calculate the number of background events $B(t)$ passing the cut
+by rescaling our signal yield in the sidebands by the fraction of the blinded fit yield
+in the signal region and sideband region. The blinded signal region of the low-$q^{2}$
+data is defined as $m_{B} \in [4, 5.7]$\,GeV, whereas the sideband is defined
+as the region $m_{B} \in [3.5, 4] \cup [5.7, 6.5]$\,GeV. Fig. \ref{fig:SBFitCRS}
+shows the blinded fit to the low-$q^{2}$ invariant B mass distribution.
+The signal-to-sideband ratio of the blinded fit yield is seen to be 0.567:0.433,
+giving a normalisation factor of 1.31. The denominator in Eq.~\ref{eq:punzicalc}
+can then be expressed as $1 + \sqrt{1.31B_{\textrm{SB}}(t)}$.
+\begin{figure}[]
+    \centering
+    \includegraphics[width = 0.5\textwidth]{figures/PunziScan.png}
+    \includegraphics[width = 0.4\textwidth]{figures/CRSVarCorrs.png}
+    \caption{Punzi significance scans for each of the 6 variables in the CRS optimisation,
+    here the $L_{\textrm{xy}}$ significance value has the peak Punzi significance (left).
+    The linear correlation coefficients between the various CRS variables (right).}
+    \label{fig:PunziScans}
+\end{figure}
+
+For each of the Punzi significance scans, shown in Fig. \ref{fig:PunziScans}, the peak
+significance was taken. These were then compared and the CRS variable with the highest
+peak Punzi significance was chosen as the first variable for optimisation in the CRS.
+This is seen to be the $L_{\textrm{xy}}$ significance. It is worth noting that
+the Punzi significance does not correspond to a physically meaningful significance,
+nor a sensitivity, instead, its maximum corresponds to a maximum sensitivity measurement,
+i.e. by maximising the Punzi significance of our CRS scan we maximise our sensitivity
+to the signal.
