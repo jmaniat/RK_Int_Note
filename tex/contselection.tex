@@ -1,48 +1,44 @@
-While the main strategy for signal extraction uses Multivariate algorithms, but
+While the main strategy for signal extraction uses multivariate algorithms,
 we have optimised a basic selection using standard discriminating variables
 that can be used for increasing the signal-over-background ratio for various studies.
 
 % - Description of the background
-The background is made up of two distinctly behaving components: combinatorial background
-and \lq B-like\rq\, background. The combinatorial background arises from the random
-combination of unrelated tracks in the detector. The \lq B-like\rq\, decays arise from
-similar decays involving B mesons, in which one or more of the final state particles
-are misidentified and so lead to the event being reconstructed as a $B_{d}^{0} \xrightarrow{} K^{*}e^{+}e^{-}$ event.
-One problem, however, is that the background events consist of an overwhelming combinatorial component,
-this component of the background is more trivially modelled than \lq B-like\rq\,background,
-than the and so obscures our ability to deal with this type of background event.
+The background is made up of two distinctly-behaving components: combinatorial background
+and misreconstructed B background. The combinatorial background arises from the random
+combination of unrelated tracks. The misreconstructed B decays are decays involving
+B mesons, in which one or more of the final state particles are misidentified
+or missing.
+After preselection, the background events consist overwhelmingly of the combinatorial
+component and most of these events have rather different properties with respect to
+the signal. Hence few basic selections can greatly reduce the amount of background
+feeding in our working sample and with reduced numbers we can explore and cross-check
+better our data and our MC samples.
 
-% - Idea behind the CRS
-A Continuum Reduction Selection (CRS), which uses lifetime-related variables that can clean up
-the overwhelming combinatorial background, was then implemented. This allows us to study and
-produce the data-MC comparison plots. Furthermore, it may allow us to focus on the
-\lq B-like\rq\,background characterisation and modelling.
+A Continuum Reduction Selection (CRS), which uses lifetime-related variables
+that can clean up the overwhelming combinatorial background, is developed.
 
 % - The variables used in the CRS and their definitions
-In order for a variable to discriminate between signal-like and combinatorial decays,
-we want it to exploit the inherent difference between the decays, that signal-like decays
-correspond to real particles (whether misreconstructed or not). As such, we expect
-signal-like events to have a longer lifetime and larger values for other variables
-proportional to the lifetime. The variables considered in the CRS are:
+The main effect we can exploit is the fact that B decays have a longer lifetime
+and larger values for other variables proportional to the lifetime.
+The variables considered in the CRS are:
 $\tau_{B}$ -- the lifetime of the B, $L_{\textrm{xy}}$ -- the displacement of the $J/\psi$
 vertex from the PV, projected onto the flight direction of the $J/\psi$
 in the transverse plane, and $\cos \theta$ -- the cosine of the angle between the vector
-joining the PV and SV, and the direction of flight of the B. The significance values
+joining the PV and SV and the direction of flight of the B. The significance values
 (i.e. the variable divided by its error) of these variables are also considered in the
 optimisation of the CRS.
 
 % - CRS optimisration incl. fits
-To optimise our cuts, in order to most efficiently cut away combinatorial background
-without also removing the signal, we must define some efficiency. In this optimisation,
-the Punzi significance \cite{Punzi} was used, which has advantages over the traditional
-method of calculating the significance $Z = S/\sqrt{S+B}$, which is used for comparing
-an existing signal with the overall statistical uncertainty in the Poissonian event count.
+To optimise our cuts, the Punzi significance \cite{Punzi} is used as it relies on the
+signal efficiency rather than the number of signal events (like other figures of merit
+such as $Z = S/\sqrt{S+B}$)
 The Punzi significance is used when we are uncertain of the cross-section we should expect,
 which will inevitably be factored in when we want to give an estimate for the signal yield.
 For the $R(K^{*})$, the large uncertainties on the $b\Bar{b}$ cross-section make the use
-of the Punzi significance necessary. Instead of the signal yield, we optimise using the
-efficiency of the cut on signal. This efficiency is calculated from the percentage of
-the MC events passing a given cut. Explicitly, the Punzi significance is calculated as
+of the Punzi significance preferable. The signal efficiency of the selection to be
+optimised is calculated from the percentage of the signal MC events passing it over the
+total number of events we start with after the preselection.
+Explicitly, the Punzi significance is calculated as
 \begin{equation}
     Z_{\textrm{Punzi}} = \frac{\epsilon(t)}{a/2 + \sqrt{B(t)}},
     \label{eq:punzicalc}
@@ -57,17 +53,20 @@ significance in the low-$q^{2}$ region.
 % - CRS applied plots
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/SidebandFit_CRSoptimisation.png}
-    \caption{A blinded extended-likelihood fit to the invariant B mass in the low-$q^{2}$ signal region.
+    \includegraphics[width=0.4\textwidth]{figures/SidebandFit_CRSoptimisation.png}
+    \caption{\textcolor{red}{need to update this plot with better quality and pulls
+    on the low sideband.}
+    A blinded extended-likelihood fit to the invariant mass in the low-$q^{2}$ signal region.
     Here the background shape is modelled by an exponential (combinatorial component) and a
-    wide Gaussian (\lq B-like' background component). Below the pulls for the fit are also
+    wide Gaussian (misreconstructed B component). Below the pulls for the fit are also
     shown for the high-mass sideband.}
     \label{fig:SBFitCRS}
 \end{figure}
 
-To perform the 2D optimisation of the CRS, two CRS variables needed to be chosen.
-These variables must have both good discriminating power between combinatorial
-and \lq signal-like' decays and also exploit the information about the data.
+We choose two variables amongst the ones listed above to define the CRS performing
+a 2D optimisation.
+The two selected variables must have both good discriminating power between combinatorial
+events and misreconstructed B decays.
 To choose the first of the two variables, a significance scan was performed
 on each of the CRS variables and the Punzi significance calculated at each
 point in the scan (corresponding to varying the cut of each CRS variable).
