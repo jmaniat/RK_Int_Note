@@ -32,6 +32,9 @@
 \def\Bu{\ensuremath{B^+}\xspace}
 \def\Bs{\ensuremath{B_s^0}\xspace}
 
+\def\B0{\ensuremath{B^0}\xspace}
+\def\Bb{\ensuremath{\overline{B}^0}\xspace}
+
 \def\Bdb{\ensuremath{\overline{B}_d^0}\xspace}
 \def\Bsb{\ensuremath{\overline{B}_s^0}\xspace}
 
@@ -39,23 +42,6 @@
 % Baryons
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\LambdaB{\ensuremath{\Lambda_b}\xspace}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BaBar
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% BABAR ... THE NAME OF THE COLLABORATION %%%%
-% Huge boldface
-\def\hbabar{\mbox{{\huge\bf\sl B}\hspace{-0.1em}{\LARGE\bf\sl A}\hspace{-0.03em}{\huge\bf\sl B}\hspace{-0.1em}{\LARGE\bf\sl A\hspace{-0.03em}R}}\xspace}
-% LARGE
-\def\Lbabar{\mbox{{\LARGE\sl B}\hspace{-0.15em}{\Large\sl A}\hspace{-0.07em}{\LARGE\sl B}\hspace{-0.15em}{\Large\sl A\hspace{-0.02em}R}}\xspace}
-% Large
-\def\lbabar{\mbox{{\large\sl B}\hspace{-0.4em} {\normalsize\sl A}\hspace{-0.03em}{\large\sl B}\hspace{-0.4em} {\normalsize\sl A\hspace{-0.02em}R}}\xspace}
-% normal size
-%\def\babar{\mbox{\sl B\hspace{-0.4em} {\small\sl A}\hspace{-0.37em} \sl B\hspace{-0.4em} {\small\sl A\hspace{-0.02em}R}}}
-% replace normalsize with scalable version       dbm 7/4/00
-\usepackage{relsize}
-\def\babar{\mbox{\slshape B\kern-0.1em{\smaller A}\kern-0.1em
-    B\kern-0.1em{\smaller A\kern-0.2em R}}\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Rare B Decay Decay Mode Macros
@@ -88,6 +74,14 @@
 \def\ee{\ensuremath{e^+e^-}\xspace}
 % mu^+mu^-
 \def\mumu{\ensuremath{\mu^+\mu^-}\xspace}
+
+% RK* specific:
+% B to K*ll
+\def\bkstarll{\ensuremath{\B0 \to (\to K^{*}\ell^+\ell^-}\xspace}
+% B to K*ee
+\def\bkstaree{\ensuremath{\B0 \to (\to K^{*}e^+e^-}\xspace}
+% B to K*mumu
+\def\bkstarmumu{\ensuremath{\B0 \to (\to K^{*}\mu^+\mu^-}\xspace}
 
 % B -> Hee
 \def\bhee{\ensuremath{B \to H\ee}\xspace}
