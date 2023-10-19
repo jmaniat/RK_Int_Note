@@ -3,6 +3,88 @@ between the signal, the combinatorial background and the misreconstructed
 $B$ decays.
 
 The discriminating variables considered are the following:
+
+%- positron_pT
+%- electron_pT
+%- trackPlus_pT
+%- trackMinus_pT
+%- positron_eta
+%- electron_eta
+%- trackPlus_eta
+%- trackMinus_eta
+%- trackPlus_phi
+%- trackMinus_phi
+%- electron_phi
+%- positron_phi
+%- electron_iso_c40
+%- positron_iso_c40
+%- trackPlus_iso_c40
+%- trackMinus_iso_c40
+%- diElectron_pvalue
+%- diMeson_pvalue
+%- angle_pp_plane_ee_plane
+%- angle_pp_plane_mm_plane
+%- a0_significance
+%- z0_significance
+%- Lxy_significance
+%- B_pT
+%- B_chi2
+%- diElectron_angle_alpha_sym
+%- diElectron_angle_beta_sym
+%- d_B_diElectron_significance
+%- diMeson_angle_alpha_sym
+%- diMeson_angle_beta_sym
+%- d_B_diMeson_significance
+%- angle_ee_plane_mm_plane
+%- d_diMeson_diElectron_significance
+%- d_diMeson_diElectron_significance
+%- diMeson_Kpi_mass
+%- diMeson_piK_mass
+%- dR_trackPlus_trackMinus
+%- tracks_dEdx_ratio
+
+
+%- Lxy
+%- lifetime
+%- lifetime significance
+%- costheta
+%- costheta significance
+
+
+
 \begin{itemize}
-\item 
+\item final states variable kinematic and isolation properties:
+  \begin{itemize}
+  \item $p_T$ of all final states particles: magnitude of the transverse momentum $\overrightarrow{p_T}$ ($4$ variables: two leptons and two mesons)
+  \item pseudorapidity $\eta$ of all final states particles ($4$ variables: two leptons and two mesons)
+  \item azimuthal angle $\phi$ of all final states particles ($4$ variables: two leptons and two mesons)
+  \item isolation variable (``iso\_c40'') of all final states particles: definition to be included ($4$ variables: two leptons and two mesons)
+  \item tracks dEdx ratio: definition to be included (how many variables? 1 or 4?)
+  \end{itemize}
+\item di-lepton and di-meson variables:
+  \begin{itemize}
+  \item di-lepton pvalue and di-meson pvalue: definition to be included ($2$ variables)
+  \item di-lepton angle alpha sym and di-meson angle alpha sym: definition to be included ($2$ variables)
+  \item di-lepton angle beta sym and di-meson angle beta sym: definition to be included ($2$ variables)
+  \item d B di-lepton significance: definition to be included ($1$ variables)
+  \item d B di-meson significance: definition to be included ($1$ variables)
+  \item d diMeson di-lepton significance: definition to be included ($1$ variables)
+  \item angle $\ell\ell$ plane mm plane: definition to be included ($1$ variables)
+  \item di-meson $K\pi$ and $\pi K$ invariant masses: $m_{K\pi}$ and $m_{\pi K}$ where the first meson is the positive one,
+    hence the $K\pi$ hypothesis tags a $\B0$ candidate and viceversa the $\pi K$ tags the $\Bb$ candidate ($2$ variables)
+  \item dR trackPlus trackMinus ($1$ variables)
+  \end{itemize}
+\item $B$ candidate and vertex variables:
+  \begin{itemize}
+  \item $p_T$ of the $B$ candidate (four-track vertex) ($1$ variables)
+  \item $\chi^2$ of the $B$ candidate (four-track vertex) ($1$ variables)
+  \item a0 significance ($1$ variables)
+  \item z0 significance ($1$ variables)
+  \item Lxy and Lxy significance ($2$ variables)
+  \item lifetime and lifetime significance ($2$ variables)
+  \item $\cos\theta$ and its significance ($|\alpha_{2\mathrm{D}}|$, pointing angle??):
+    Angle in the transverse plane between the vector from the primary to the secondary
+    vertex  $\Delta\overrightarrow{x}$ and the B candidate momentum $\overrightarrow{p}^B$ ($2$ variables)
+  \item angle pp plane ee plane and angle pp plane mm plane ($2$ variables)
+  \end{itemize}
 \end{itemize}
