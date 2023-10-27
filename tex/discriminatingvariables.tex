@@ -95,3 +95,76 @@ The discriminating variables considered are the following:
   \item angle pp plane ee plane and angle pp plane mm plane: definition to be included ($2$ variables)
   \end{itemize}
 \end{itemize}
+
+
+\begin{table}[h]
+  \begin{center}
+    \footnotesize%
+    \begin{tabular}{l|m{6.2cm}}
+      \toprule
+       Variable & Description \\
+      \midrule 
+      \midrule
+\makecell[l]{$p_T(e_1)$, $p_T(e_2)$, $p_T(trk_1)$, $p_T(trk_2)$} &
+Transverse momentum\\
+\midrule
+
+\makecell[l]{$\eta(e_1)$, $\eta(e_2)$, $\eta(trk_1)$, $\eta(trk_2)$} &
+Pseudorapidity\\
+\midrule
+
+\makecell[l]{$\phi(e_1)$, $\phi(e_2)$, $\phi(trk_1)$, $\phi(trk_2)$} &
+The angle between the particle trajectory and the plane perpendicular to the beamline\\
+\midrule
+
+\makecell[l]{$\text{ISO}_{c40}(e_1)$, $\text{ISO}_{c40}(e_2)$\\$\text{ISO}_{c40}(trk_1)$, $\text{ISO}_{c40}(trk_2)$} &
+The sum of energy from other particles in a cone of radius=0.4\\
+\midrule
+
+
+\makecell[l]{$\text{P-value}(ee)$, $\text{P-value}(K\pi)$} &
+The probability that $ee$ or $K\pi$ are produced by background.\\
+\midrule
+
+
+\makecell[l]{$\angle(ee-K\pi|ee)-\text{plane}$\\$\angle(ee-K\pi|K\pi)-\text{plane}$} &
+The angle between the vector-sum of $ee-K\pi$ vs. $ee$ or $K\pi$.\\
+\midrule
+
+
+\makecell[l]{$a_0^{sig}$, $z_0^{sig}$, $L_{xy}^{sig}$} &
+These are the point closest to the primary vertex: $a_0$ is the distance perpendicular to the beam, $z_0$ are along the beamline, and $L_{xy}$ is the distance between the decay vertex and primary vertex. Significance is the distance divided by its uncertainty.\\
+\midrule
+
+\makecell[l]{$\chi^2(B)$, $p_T(B)$} &
+Transverse momentum for the B-meson and its good-of-fit from the reconstruction.\\
+\midrule
+
+\makecell[l]{$\alpha(ee)$, $\beta(ee)$, $d_{vtx}^{sig}(B-ee)$} &
+$\alpha(ee)$ is the angle of the electron pair. $\beta(ee)$ is the velocity of the center of mass of the electron pair. $d_{vtx}^{sig}(B-ee)$ is the distance between the $ee$ and $B$ vertex divided by its uncertainty
+\\
+\midrule
+
+\makecell[l]{$\alpha(K\pi)$, $\beta(K\pi)$, $d_{vtx}^{sig}(B-K\pi)$} &
+Same as above, just with $K\pi$ instead of $ee$.
+\\
+\midrule
+
+\makecell[l]{$\angle(ee|K\pi)-\text{plane}$, $d_{vtx}^{sig}(ee-K\pi)$} &
+The angle between the vector-sum of $ee$ vs. $-K\pi$ and the significant distance between the $ee$ and $K\pi$ vertex. \\
+\midrule
+
+\makecell[l]{$m(K^+\pi^-)$, $m(K^-\pi^+)$} &
+invariant mass of the kaon pion decay (and its antiparticle)
+\\
+\midrule
+
+\makecell[l]{$\Delta R(K\pi)$, $\nicefrac{\left(\frac{dE}{dx}\right)_{t1}}{\left(\frac{dE}{dx}\right)_{t2}}$} &
+The angular separation of $K\pi$ and the fraction consist of $\frac{dE}{dx}$, which are the energy loss in the detector at different layers.\\
+
+    \bottomrule
+    \end{tabular}
+  \end{center}
+  \caption{Features/variables that can discriminate between signal and background. On the left, the variable/feature is written mathematically, and on the right an explanation of the variable is given.}
+  \label{tab:features}
+\end{table}
