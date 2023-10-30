@@ -1,1 +1,221 @@
 \subsection{Trigger for the muon final states}
+
+Events with the muon final states are selected using the \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} trigger. At L1, it requires two muon regions of interest (ROI) with $p_T > 6$~GeV and opening angle $\Delta R < 1.5$. At L2, it requires a di-muon vertex with $\chi^2 < 20$ and $0.1 < m_{\mu\mu} < 6.5$~GeV, two opposite-charged tracks with mass in range 0.1 - 15~GeV and fit to a common vertex with $\chi^2 < 20$. At EF, the $B_d \rightarrow K^{*0} \mu^+ \mu^-$ vertex is reconstructed with the requirements of $B_d$-vertex $\chi^2 < 60$, $K^{*0}$-vertex $\chi^2 < 400$, $m_{B_d} \in [4.6, 5.9]$~GeV and $m_{K^{*0}} \in [0.7, 1.1]$~GeV.
+
+The trigger efficiency, defined as the ratio of events that fire the trigger to those pass the offline selections, is a crucial part of the total efficiency. For a normal di-muon trigger, the strategy is to factorize the efficiency as 
+
+\begin{equation}
+\varepsilon_{\mu\mu} = \varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY})\times c_{\mu\mu}(\Delta R, |y^{\mu\mu}|),
+\end{equation}
+
+where $\varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY})$ is the efficiency for the single muon legs to identify the RoIs of the two muons, X and Y represent the $p_T$ thresholds of the two legs, and $c_{\mu\mu}(\Delta R, |y^{\mu\mu}|)$ is the di-muon correction accounting for the inefficiency due to di-muon effect.
+
+Assuming $\text{Y} > \text{X}$, the first term can be further broken down as
+
+\begin{equation}
+\begin{aligned}
+&\varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY}) \\
+&= \varepsilon_{\text{muY}}(1)[\varepsilon_{\text{muX}}(2)-\varepsilon_{\text{muY}}(2)] +\varepsilon_{\text{muY}}(2)[\varepsilon_{\text{muX}}(1)-\varepsilon_{\text{muY}}(1)] +\varepsilon_{\text{muY}}(1)\varepsilon_{\text{muY}}(2) \\
+&=\varepsilon_{\text{muX}}(1)\varepsilon_{\text{muY}}(2)+\varepsilon_{\text{muX}}(2)\varepsilon_{\text{muY}}(1)-\varepsilon_{\text{muY}}(1)\varepsilon_{\text{muY}}(2)
+\end{aligned},
+\end{equation}
+
+where $\varepsilon_{\text{muX}}(1) \equiv \varepsilon_{\text{muX}}(p^{(1)}_T, q\eta^{(1)})$ is the single muon efficiency. The charge-signed pseudorapidity $q\eta$ instead of normal pseudorapidity is used to account for the charge dependence of reconstruction in the toroidal magnetic field of the muon spectrometer. For symmetric triggers, this term simply reduces to $\varepsilon_{\text{muX}}(1)\varepsilon_{\text{muX}}(2)$.
+
+The di-muon correction can be broken down into
+
+\begin{equation}
+c_{\mu\mu}(\Delta R, |y^{\mu\mu}|) = c_{\Delta R}(\Delta R, |y^{\mu\mu}|) \times c_a(|y^{\mu\mu}|),
+\end{equation}
+
+where $c_{\Delta R}(\Delta R, |y^{\mu\mu}|)$ is the $\Delta R$ correction accounting for the loss of efficiency at small $\Delta R$ where the RoIs can be overlapping, and $c_a(|y^{\mu\mu}|)$ is the asymptotic correction accounting for the loss of efficiency due to the opposite charge and vertex requirement.
+
+\subsubsection{$\Delta R$ correction}
+The $\Delta R$ correction is obtained by di-muon tag-and-probe method. The tag muon should match to HLT muon of the tag triggers with $\Delta R < 0.01$, and match to L1 RoI by $\Delta R < \text{L1Cut}(p_T)$, where
+
+\begin{equation}
+\text{L1Cut}(p_T) = \left\{
+\begin{aligned}
+-0.01p_T + 0.18 &, \text{ if } p_T < 10 \text{ GeV} \\
+0.08 &, \text{ otherwise}
+\end{aligned}
+\right.
+\end{equation}
+
+In 2017, \texttt{HLT\_mu14\_bJpsi\_TrkPEB} and \texttt{HLT\_mu20\_bJpsi\_TrkPEB} are used as tag triggers for $c_{\Delta R}$. In 2018, only \texttt{HLT\_mu10\_bJpsi\_TrkPEB} is used as tag trigger.
+
+To correctly extract $\Delta R$ correction, additional event selections are required:
+
+\begin{itemize}
+
+\item $p_T > 12 \text{ GeV}$ for both muons, to make sure $\varepsilon_{\text{muX}}$ is at the plateau to get rid of single muon effect
+
+\item Events un-prescaled with respect to the di-muon trigger
+
+\end{itemize} 
+
+The ratio $\rho_{\Delta R}$ is defined as
+
+\begin{equation}
+\rho_{\Delta R}(\Delta R, |y^{\mu\mu}|) = \dfrac{N(\text{tagged + accepted by \texttt{HLT\_2mu10\_bJpsimumu}})}{N(\text{tagged by \texttt{HLT\_mu10\_bJpsi\_TrkPEB}})},
+\end{equation}
+
+where the number of candidates in each $(\Delta R, |y^\mu\mu|)$ bin is obtained by fitting to the di-muon invariant mass distribution. An example is shown in Figure~\ref{fig:fit_example}.
+
+\begin{figure}[h]
+\center
+\includegraphics[width=12cm,height=8.28cm]{fit_example.eps} 
+\caption{An example of the unbinned maximum likelihood fit to the di-muon invariant mass distribution to extract the number of candidates in the bin $0.14< \Delta R < 0.16$ and $1.2 < |y^{\mu\mu}| < 2.4$. The fit function consists of a Gaussian plus one-sided Crystal-Ball signal and an exponential background. The red (blue) curve is the fit to candidates accepted (rejected) by the di-muon trigger.}
+\label{fig:fit_example}
+\end{figure}
+
+$\rho_{\Delta R}$ is fitted against $\Delta R$ with an error function with a normalization 
+
+\begin{equation}
+f(x;p_0,p_1,p_2) = p_2\text{Erf}[(x+p_0)/p_1]
+\end{equation}
+
+in three rapidity $|y^{\mu\mu}|$ regions: barrel ($0 < |y^{\mu\mu}| < 1.05$), overlap ($1.05 < |y^{\mu\mu}| < 1.2$) and endcap ($1.2 < |y^{\mu\mu}| < 2.4$). The result of the fits are shown in Figure~\ref{fig:fit_rho_dr}.
+
+\begin{figure}[h]
+\center
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_undefined_periodMC16e.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_undefined_periodMC16e} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_undefined_periodMC16e} 
+\end{subfigure}
+\caption{$\rho_{\Delta R}$ fits for \texttt{HLT\_2mu10\_bJpsimumu} in data18 (top) and MC16e (bottom) in the three $|y^{\mu\mu}|$ regions. The red line is the fit to the data points, and the green area is the uncertainty of the fit.}
+\label{fig:fit_rho_dr}
+\end{figure}
+
+The true correction $c_{\Delta R}$ is extracted from the fit by removing the overall normalization. For $\Delta R$ smaller than the shift, $c_{\Delta R}$ is manually set to a value close to zero. As $c_{\Delta R}$ is independent of the $p_T$ thresholds of the legs due to the additional event selection, it is practical to extract $c_{\Delta R}$ only from \texttt{HLT\_2mu10\_bJpsimumu} and apply it to all other di-muon triggers. Figure~\ref{fig:c_delta_dr} shows the $c_{\Delta R}$ curves of \texttt{HLT\_2mu10\_bJpsimumu} and \texttt{HLT\_mu11\_mu6\_bJpsimumu}. The curves of the two triggers agree very well.
+
+\begin{figure}[h]
+\center
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_Data18_Barrel.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_Data18_Overlap.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_Data18_Endcap.eps} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_MC16e_Barrel.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_MC16e_Overlap.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{c_dr_pT_thresholds_compare_MC16e_Endcap.eps} 
+\end{subfigure}
+\caption{$c_{\Delta R}$ of \texttt{HLT\_2mu10\_bJpsimumu} and \texttt{HLT\_mu11\_mu6\_bJpsimumu} in data18 (top) and MC16e (bottom) in the three $|y^{\mu\mu}|$ regions.}
+\label{fig:c_delta_dr}
+\end{figure}
+
+\subsubsection{Asymptotic correction}
+
+The asymptotic correction $c_a$ is obtained by using an auxiliary di-muon trigger with no vertex and opposite charge requirements, that is
+
+\begin{equation}
+c_a(|y^{\mu\mu}|) = \dfrac{N(\text{accepted by \texttt{HLT\_mu11\_mu6\_bJpsimumu}})}{N(\text{accepted by \texttt{HLT\_mu11\_mu6\_bDimu\_novtx\_noos}})}
+\end{equation}
+
+The following selections are applied:
+
+\begin{itemize}
+
+\item Baseline $p_T$ selection for the muons, depending on the $p_T$ thresholds of the di-muon trigger
+
+\item Events un-prescaled with respect to the di-muon trigger
+
+\end{itemize} 
+
+$c_a$ saturates quickly against $\Delta R$, hence it is extracted by fitting with a constant. In 2017-18, \texttt{HLT\_mu11\_mu6\_bDimu\_novtx\_noos} is the only available trigger with no vertex+OS requirement. Similar to $c_{\Delta R}$, $c_a$ should not depend on the $p_T$ thresholds of the di-muon trigger, and also $c_a$ is very close to one, hence $c_a$ from \texttt{HLT\_mu11\_mu6\_bJpsimumu} is applied to all other triggers. The results of the fit are shown in Figure~\ref{fig:fit_c_a}.
+
+
+\begin{figure}[h]
+\center
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_data18_Barrel.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_data18_Overlap.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_data18_Endcap.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_mc16e_Barrel.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_mc16e_Overlap.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=5.5cm,height=4.14cm]{plots_fit_c_a_mc16e_Endcap.eps} 
+\end{subfigure}
+\caption{$\rho_{\Delta R}$ fits for \texttt{HLT\_2mu10\_bJpsimumu} in data18 (top) and MC16e (bottom) in the three $|y^{\mu\mu}|$ regions. The red line is the fit to the data points, and the green area is the uncertainty of the fit.}
+\label{fig:fit_c_a}
+\end{figure}
+
+\subsubsection{Single muon efficiency}
+
+The single muon efficiency is obtained using the same method as Run 1. To extract, for example, the single muon efficiency of \texttt{HLT\_mu10\_nomucomb}, we first obtain the ratio:
+
+\begin{equation}
+\rho_{J/ \psi}(p^{\text{probe}}_T, q\eta^{\text{probe}}, \Delta R, |y^{\mu\mu}|) = \dfrac{N(\text{tagged + accepted by \texttt{HLT\_2mu10\_bJpsimumu}})}{N(\text{tagged by \texttt{HLT\_mu10\_bJpsi\_TrkPEB}})}
+\end{equation}
+
+The single muon efficiency can then be extracted by weighting $\rho_{J/ \psi}$ by the reciprocal of the di-muon correction $c_{\mu\mu}$:
+
+\begin{equation}
+\varepsilon_{\text{mu10}}(p_T, q\eta) = \dfrac{\rho_{J/ \psi}(p_T, q\eta, \Delta R, |y^{\mu\mu}|)}{c_{\mu\mu}(\Delta R, |y^{\mu\mu}|)}
+\end{equation}
+
+
+In 2018, un-prescaled, non-L1topo and symmetric \texttt{2mu6} triggers are not available. Hence, $\varepsilon_{\text{mu6}}$ can only be obtained from asymmetric \texttt{HLT\_mu11\_mu6\_bJpsimumu} trigger. However, it is difficult to determine whether the probe muon matches to the mu11 leg or the mu6 leg. To increase the chance that the tag muon is accepted by the mu11 leg and the probe muon is matched to the mu6 leg, the following selections are added:
+
+\begin{itemize}
+
+\item Tag muon matched to \texttt{HLT\_mu10\_bJpsi\_TrkPEB} and tag $p_T > 11 \text{ GeV}$
+
+\item For probe $p_T < 11 \text{ GeV}$, the probe muon should be simultaneously accepted or rejected by both \texttt{HLT\_mu6\_nomucomb} and \texttt{HLT\_mu11\_mu6\_bJpsimumu}
+
+\end{itemize} 
+
+These selections are rather empirical and cannot entirely remove the candidates in which the tag and probe muon is actually matched to the other legs, but the systematic effect can be evaluated through the closure test and include as part of the systematic uncertainties. Figure~\ref{fig:Run1_singlemueffmap} shows the 2D maps of efficiency in terms of $p_T$ and $q\eta$. 
+
+
+\begin{figure}[h]
+\center
+\begin{subfigure}[b]{0.4\textwidth}
+\includegraphics[width=6.5cm,height=4.8cm]{Run1_data18_mu6.eps} 
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+\includegraphics[width=6.5cm,height=4.8cm]{Run1_MC16e_mu6.eps} 
+\end{subfigure}
+\caption{The maps of single muon efficiency of \texttt{HLT\_mu6\_nomucomb} extracted by the Run1 method using \texttt{HLT\_mu11\_mu6\_bJpsimumu} as the di-muon trigger.}
+\label{fig:Run1_singlemueffmap}
+\end{figure}
+
+
+
+
+
+
