@@ -1,0 +1,84 @@
+The table~\ref{tab:FeatureEngennering} has been compiled by master student Daniel Munk for his thesis.
+
+%\begin{fullwidth}
+\begin{table}
+  \begin{center}
+    \footnotesize%
+    \begin{tabular}{lm{11.9cm}}
+      \toprule
+$p_T(e_1)$: & $positron\_pT  = BeeKst\_electron0\_pT$\\
+$p_T(e_2)$: & $electron\_pT =    = BeeKst\_electron1\_pT$\\
+$p_T(trk_1)$: & $trackPlus\_pT  = BeeKst\_meson0\_pT$\\
+$p_T(trk_2)$: &  $trackMinus\_pT = BeeKst\_meson1\_pT$\\
+
+$\eta(e_1)$: & $positron\_eta  = BeeKst\_electron0\_eta$\\
+$\eta(e_2)$: & $electron\_eta =    = BeeKst\_electron1\_eta$\\
+$\eta(trk_1)$: & $trackPlus\_eta  = BeeKst\_meson0\_eta$\\
+$\eta(trk_2)$: &  $trackMinus\_eta = BeeKst\_meson1\_eta$\\
+
+$\phi(e_1)$: & $positron\_phi  = BeeKst\_electron0\_phi$\\
+$\phi(e_2)$: & $electron\_phi =    = BeeKst\_electron1\_phi$\\
+$\phi(trk_1)$: & $trackPlus\_phi  = BeeKst\_meson0\_phi$\\
+$\phi(trk_2)$: &  $trackMinus\_phi = BeeKst\_meson1\_phi$\\
+
+$ISO_{c40}(e_1)$: & $positron\_iso\_c40  = BeeKst\_electron0\_iso\_c40$\\
+$ISO_{c40}(e_2)$: & $electron\_iso\_c40 =    = BeeKst\_electron1\_iso\_c40$\\
+$ISO_{c40}(trk_1)$: & $trackPlus\_iso\_c40  = BeeKst\_meson0\_iso\_c40$\\
+$ISO_{c40}(trk_2)$: &  $trackMinus\_iso\_c40 = BeeKst\_meson1\_iso\_c40$\\
+
+$\chi^2(B)$: & $B\_chi2 = BeeKst\_chi2$\\
+
+$m(K\pi)$: & $diMeson\_Kpi\_mass  = BeeKst\_kaonPion\_mass$\\
+$m(\pi K)$: & $diMeson\_piK\_mass = BeeKst\_pionKaon\_mass$\\
+
+$m(K\pi) - m(\pi K)$: & $diMeson\_Kpi\_piK\_mass\_diff = (diMeson\_Kpi\_mass - diMeson\_piK\_mass $\\
+$Mean(m(K\pi),m(\pi K))$: & $diMeson\_Kpi\_piK\_mass\_avg  = (diMeson\_Kpi\_mass + diMeson\_piK\_mass )/2$\\
+
+$p_T(B)$: & $B_pT = vtx\_Bd\_p4.pt$, ($\sqrt{p_x^2+p_y^2}$)\\
+
+$a_0^{sig}$: & $a0\_significance = BeeKst\_a0\_minA0 /  dBeeKst\_a0\_minA0\_err$\\
+$z_0^{sig}$: & $z0\_significance = BeeKst\_z0\_minA0 /  dBeeKst\_z0\_minA0\_err$\\
+
+$L_{xy}^{sig}$: & $Lxy\_significance = BeeKst\_Lxy\_minA0 /  dBeeKst\_Lxy\_minA0\_err$\\
+
+$P-value(ee)$: & $diElectron\_pvalue = 1-CDF_{\chi^2}(\chi^2=BeeKst\_diElectron\_chi2,nDoF = BeeKst\_diElectron\_nDoF)$\\
+
+$P-value(K\pi)$: & $diMeson\_pvalue = 1-CDF_{\chi^2}(\chi^2=BeeKst\_diMeson\_chi2,nDoF = BeeKst\_diMeson\_nDoF)$\\
+
+$d_{vtx}^{sig}(B-K\pi)$: & \makecell[l]{$d\_B\_diMeson\_significance = $ \\$d^{sig}(vtx\_Bd\_vtx, vtx\_Bd\_vtx\_err, vtx\_diMeson\_vtx, vtx\_diMeson\_vtx\_err)$ Eq.~\ref{eq:distance_sig}}\\
+$d_{vtx}^{sig}(B-ee)$: & \makecell[l]{$d\_B\_diElectron\_significance =$\\ $d^{sig}(vtx\_Bd\_vtx, vtx\_Bd\_vtx\_err, vtx\_diLepton\_vtx, vtx\_diLepton\_vtx\_err)$ Eq.~\ref{eq:distance_sig}}\\
+$d_{vtx}^{sig}(ee-K\pi)$: & \makecell[l]{$d\_diMeson\_diElectron\_significance = $\\$d^{sig}(vtx\_diMeson\_vtx, vtx\_diMeson\_vtx\_err, vtx\_diLepton\_vtx, vtx\_diLepton\_vtx\_err)$ Eq.~\ref{eq:distance_sig}}\\
+
+$\Delta R(K\pi)$: & $dR\_trackPlus\_trackMinus = \sqrt((\Delta\phi)^2 + (\Delta\eta)^2)$, $\Delta\phi = (vtx\_m0\_K\_p4 - vtx\_m1\_pi\_p4)_\phi$ and $\Delta\eta = (vtx\_m0\_K\_p4 - vtx\_m1\_pi\_p4)_\eta$\\
+
+
+$\alpha(K\pi)$:& $diMeson\_angle\_alpha\_sym = \mid \dfrac{\pi}{2} - \cos^{-1}\left(\dfrac{vtx\_n1\cdot vtx\_Kpi\_p4 }{\lvert vtx\_n1 \rvert\ \lvert vtx\_Kpi\_p4 \rvert\ }\right) \mid$\\
+
+$\beta(K\pi)$:& $diMeson\_angle\_beta\_sym = \mid  \mid \dfrac{\pi}{2} -   \cos^{-1}\left(\dfrac{vtx\_n3\_pmm\cdot vtx\_B2diMeson }{\lvert vtx\_n3\_pmm \rvert\ \lvert vtx\_B2diMeson \rvert\ }\right)  \mid  - \dfrac{\pi}{2}  \mid   $\\
+
+
+$\alpha(ee)$:& $diElectron\_angle\_alpha\_sym = \mid \dfrac{\pi}{2} - \cos^{-1}\left(\dfrac{vtx\_n1\cdot vtx\_diLepton\_p4 }{\lvert vtx\_n1 \rvert\ \lvert vtx\_diLepton\_p4 \rvert\ }\right) \mid$\\
+
+$\beta(ee)$:& $diMeson\_angle\_beta\_sym = \mid  \mid \dfrac{\pi}{2} -   \cos^{-1}\left(\dfrac{vtx\_n3\_pee\cdot vtx\_B2diLepton }{\lvert vtx\_n3\_pee \rvert\ \lvert vtx\_B2diLepton \rvert\ }\right)  \mid  - \dfrac{\pi}{2}  \mid   $\\
+
+$\nicefrac{(\frac{dE}{dx})_{t1}}{(\frac{dE}{dx})_{t2}}$: & $tracks\_dEdx\_ratio = \dfrac{BeeKst\_meson0\_pixeldEdx}{BeeKst\_meson1\_pixeldEdx}$\\
+
+$(\frac{dE}{dx})_{t1}-(\frac{dE}{dx})_{t2}$: & $tracks\_dEdx\_diff = BeeKst\_meson0\_pixeldEdx -BeeKst\_meson1\_pixeldEdx$\\
+
+$\angle(ee-K\pi|ee)\text{-plane}$: & $angle\_vtx_plane\_ee\_plane =  \cos^1\left(\dfrac{vtx\_n1\cdot vtx\_n2\_ee }{\lvert vtx\_n1 \rvert\ \lvert vtx\_n2\_ee \rvert\ }\right) $\\
+
+$\angle(ee-K\pi|K\pi)\text{-plane}$: & $angle\_vtx\_plane\_mm\_plane =  \cos^1\left(\dfrac{vtx\_n1\cdot vtx\_n2\_mm }{\lvert vtx\_n1 \rvert\ \lvert vtx\_n2\_mm \rvert\ }\right) $\\
+
+$\angle(ee|K\pi)\text{-plane}$: & $angle\_vtx\_plane\_mm\_plane =  \cos^1\left(\dfrac{vtx\_n2\_ee\cdot vtx\_n2\_mm }{\lvert vtx\_n2\_ee \rvert\ \lvert vtx\_n2\_mm \rvert\ }\right) $\\
+
+$\angle(Q(ee,K\pi)|K\pi)\text{-plane}$: & $angle\_pp\_plane\_mm\_plane =  \cos^1\left(\dfrac{vtx\_n1\_pp\cdot vtx\_n2\_mm }{\lvert vtx\_n1\_pp \rvert\ \lvert vtx\_n2\_mm \rvert\ }\right) $\\
+
+$\angle(Q(ee,K\pi)|ee)\text{-plane}$: & $angle\_pp\_plane\_ee\_plane =  \cos^1\left(\dfrac{vtx\_n1\_pp\cdot vtx\_n2\_ee }{\lvert vtx\_n1\_pp \rvert\ \lvert vtx\_n2\_ee \rvert\ }\right) $\\
+
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \caption[Engineered features used in Analysis][-5ex]{\footnotesize Engineered features used in Analysis.}
+  \label{tab:FeatureEngennering}
+\end{table}
+%\end{fullwidth}
