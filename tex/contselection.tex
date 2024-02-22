@@ -52,17 +52,24 @@ significance in the low-$q^{2}$ region.
 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.45\textwidth]{figures/CRSVarCorrs.png}
     \includegraphics[width=0.35\textwidth]{figures/SidebandFit_CRSoptimisation.png}
-    \caption{{\textit{Right plot}}: The linear correlation coefficients between the various
-    CRS variables.
-    {\textit{Left plot}}: A blinded extended-likelihood fit to the invariant mass in the
+    \caption{A blinded extended-likelihood fit to the invariant mass in the
     low-$q^{2}$ signal region. Here the background shape is modelled by an exponential
     (combinatorial component) and a wide Gaussian (misreconstructed B component).
-    Below the pulls for the fit are also shown for the high-mass sideband.
-    \textcolor{red}{need to update this plot with better quality and pulls
-    on the low sideband.}}
-    \label{fig:CorrAndSBFit}
+    Below the pulls for the fit are also shown.}
+    \label{fig:SBFit}
+\end{figure}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/CRSVarCorrs.png}
+    \includegraphics[width = 0.44\textwidth]{figures/PunziScan.png}
+    \caption{{\textit{Right plot}}: The linear correlation coefficients between the various
+    CRS variables.
+    {\textit{Left plot}}: Punzi significance scans for each of the $6$ variables in the CRS optimisation,
+    here the $L_{\textrm{xy}}$ significance value has the peak Punzi significance.
+    }
+    \label{fig:CorrAndPunziScan}
 \end{figure}
 
 We choose two variables amongst the ones listed above to define the CRS performing
@@ -80,7 +87,7 @@ we can calculate the number of background events $B(t)$ passing the cut
 by rescaling our signal yield in the sidebands by the fraction of the blinded fit yield
 in the signal region and sideband region. The blinded signal region of the low-$q^{2}$
 data is defined as $m_{B} \in [4.0, 5.7]$\,GeV, whereas the sideband is defined
-as the region $m_{B} \in [3.5, 4.0] \cup [5.7, 6.5]$\,GeV. Fig. \ref{fig:CorrAndSBFit}
+as the region $m_{B} \in [3.5, 4.0] \cup [5.7, 6.5]$\,GeV. Fig. \ref{fig:SBFit}
 shows the blinded fit to the low-$q^{2}$ invariant B mass distribution.
 The signal-to-sideband normalisation ratio from the blinded fit background yield
 is a factor of $1.31$. The denominator in Eq.~\ref{eq:punzicalc}
@@ -88,17 +95,16 @@ can then be expressed as $1 + \sqrt{1.31B_{\textrm{SB}}(t)}$.
 
 \begin{figure}[]
     \centering
-    \includegraphics[width = 0.44\textwidth]{figures/PunziScan.png}
     \includegraphics[width = 0.47\textwidth]{figures/2DPunziOpt.png}
+    \includegraphics[width = 0.47\textwidth]{figures/2DPunziOpt_zoom.png}
     \caption{
-    {\textit{Left plot}}: Punzi significance scans for each of the $6$ variables in the CRS optimisation,
-    here the $L_{\textrm{xy}}$ significance value has the peak Punzi significance.
     {\textit{Right plot}}: 2D optimisation performed by scanning the Punzi significance of
-    $\cos \theta$ significance cuts, for a given cut on the $L_{\textrm{xy}}$ significance.}
-    \label{fig:PunziScans}
+    $\cos \theta$ significance cuts, for a given cut on the $L_{\textrm{xy}}$ significance.
+    {\textit{Left plot}}: zoomed-in version of the Punzi significance scan on the right.}
+    \label{fig:PunziMax}
 \end{figure}
 
-For each of the Punzi significance scans, shown in Fig. \ref{fig:PunziScans}, the peak
+For each of the Punzi significance scans, shown in Fig. \ref{fig:CorrAndPunziScan}, the peak
 significance was taken. These were then compared and the CRS variable with the highest
 peak Punzi significance was chosen as the first variable for optimisation in the CRS.
 This is seen to be the $L_{\textrm{xy}}$ significance. It is worth noting that
@@ -109,13 +115,14 @@ to the signal.
 
 For choosing the second variable to be optimised, and with the idea of choosing the remaining
 variable which would exploit the most information about the data, the correlations between
-the CRS variables were calculated. These are shown in Fig \ref{fig:PunziScans}.
+the CRS variables were calculated. The correlations between the variables are shown in
+Fig.~\ref{fig:CorrAndPunziScan}.
 Having chosen the $L_{\textrm{xy}}$ significance as the first variable in the 2D CRS optimisation,
 the second variable is the one with the smallest correlation coefficient with $L_{\textrm{xy}}$,
 which is seen to be the $\cos \theta$ significance.
 Finally, the 2D optimisation of the cuts in $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$
 was done by performing a grid search maximisation of the Punzi significance for pairs of cuts.
-Fig~\ref{fig:PunziScans} shows the Punzi significance scan for a few slices of the grid search.
+Fig~\ref{fig:PunziMax} shows the Punzi significance scan for a few slices of the grid search.
 Optimum cuts on $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$ were found
 to be $L_{\textrm{xy}}/\sigma_{L} >  15.8, \cos \theta/\sigma_{\cos \theta} > 0.016$.
 \begin{figure}
