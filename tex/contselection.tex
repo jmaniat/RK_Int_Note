@@ -72,7 +72,7 @@ significance in the low-$q^{2}$ region.
     \label{fig:CorrAndPunziScan}
 \end{figure}
 
-We choose two variables amongst the ones listed above to define the CRS performing
+We choose two variables amongst the ones listed above to define the CRS, performing
 a 2D optimisation.
 The two selected variables must have both good discriminating power between combinatorial
 events and misreconstructed B decays.
@@ -90,8 +90,8 @@ data is defined as $m_{B} \in [4.0, 5.7]$\,GeV, whereas the sideband is defined
 as the region $m_{B} \in [3.5, 4.0] \cup [5.7, 6.5]$\,GeV. Fig. \ref{fig:SBFit}
 shows the blinded fit to the low-$q^{2}$ invariant B mass distribution.
 The signal-to-sideband normalisation ratio from the blinded fit background yield
-is a factor of $1.31$. The denominator in Eq.~\ref{eq:punzicalc}
-can then be expressed as $1 + \sqrt{1.31B_{\textrm{SB}}(t)}$.
+is a factor of $0.820$. The denominator in Eq.~\ref{eq:punzicalc}
+can then be expressed as $1 + \sqrt{0.820 B_{\textrm{SB}}(t)}$.
 
 \begin{figure}[]
     \centering
@@ -99,7 +99,7 @@ can then be expressed as $1 + \sqrt{1.31B_{\textrm{SB}}(t)}$.
     \includegraphics[width = 0.47\textwidth]{figures/2DPunziOpt_zoom.png}
     \caption{
     {\textit{Right plot}}: 2D optimisation performed by scanning the Punzi significance of
-    $\cos \theta$ significance cuts, for a given cut on the $L_{\textrm{xy}}$ significance.
+    $\cos \theta$ cuts, for a given cut on the $L_{\textrm{xy}}$ significance.
     {\textit{Left plot}}: zoomed-in version of the Punzi significance scan on the right.}
     \label{fig:PunziMax}
 \end{figure}
@@ -109,22 +109,22 @@ significance was taken. These were then compared and the CRS variable with the h
 peak Punzi significance was chosen as the first variable for optimisation in the CRS.
 This is seen to be the $L_{\textrm{xy}}$ significance. It is worth noting that
 the Punzi significance does not correspond to a physically meaningful significance,
-nor a sensitivity, instead, its maximum corresponds to a maximum sensitivity measurement,
+nor a sensitivity, instead, its maximum corresponds to a maximumimally sensitive measurement,
 i.e. by maximising the Punzi significance of our CRS scan we maximise our sensitivity
 to the signal.
 
 For choosing the second variable to be optimised, and with the idea of choosing the remaining
-variable which would exploit the most information about the data, the correlations between
+variable which would exploit the most information about the data, the linear correlations between
 the CRS variables were calculated. The correlations between the variables are shown in
 Fig.~\ref{fig:CorrAndPunziScan}.
 Having chosen the $L_{\textrm{xy}}$ significance as the first variable in the 2D CRS optimisation,
 the second variable is the one with the smallest correlation coefficient with $L_{\textrm{xy}}$,
-which is seen to be the $\cos \theta$ significance.
-Finally, the 2D optimisation of the cuts in $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$
+which is seen to be $\cos \theta$.
+Finally, the 2D optimisation of the cuts in $L_{\textrm{xy}}/\sigma_{L}, \cos \theta$
 was done by performing a grid search maximisation of the Punzi significance for pairs of cuts.
 Fig~\ref{fig:PunziMax} shows the Punzi significance scan for a few slices of the grid search.
-Optimum cuts on $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/\sigma_{\cos \theta})$ were found
-to be $L_{\textrm{xy}}/\sigma_{L} >  15.8, \cos \theta/\sigma_{\cos \theta} > 0.016$.
+Optimum cuts on $(L_{\textrm{xy}}/\sigma_{L}, \cos \theta/)$ were found
+to be $L_{\textrm{xy}}/\sigma_{L} > 18.75, \cos \theta > 0.999938$.
 \begin{figure}
     \centering
     \includegraphics[width = 0.4\textwidth]{figures/B_masses_cutflow_JPsi_highq2_datafit.png}
