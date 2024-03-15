@@ -168,3 +168,28 @@ The angular separation of $K\pi$ and the fraction consist of $\frac{dE}{dx}$, wh
   \caption{Features/variables that can discriminate between signal and background. On the left, the variable/feature is written mathematically, and on the right an explanation of the variable is given.}
   \label{tab:features}
 \end{table}
+
+
+Say which ones are the most discriminating:
+Two MC signals (res and NR) vs two background (the NR sidebands and SS events).
+Show a subselection of plots in the main note but the whole set in the appendix
+Subselection here based on most discriminating by eye (or by GNN feature importance)
+Variable importance https://indico.cern.ch/event/1255186/contributions/5273012/attachments/2607210/4503955/preliminary-importance-score-of-features.pdf
+\begin{enumerate}
+\item Lxy\_significance
+\item a0\_significance
+\item B chi2
+\item B pT
+\item track plus pT
+\item track minus pT
+\end{enumerate}
+
+
+% plot of the discriminating variables: 2 sets -> 1/ signal vs background 2/ SS vs SB
+\begin{figure}
+    \centering
+    %\includegraphics[width=0.48\textwidth]{figures/B_const_mass_CRS_before_eefit.png}
+    \caption{Discriminating variable plots for signal/background comparison: the two MC signals (high and low $q^2$) and two background samples
+    (the low $q^2$ mass sidebands and the same-sign-meson (SS) events are shown.)}
+    \label{fig:crs_effect_after}
+\end{figure}
