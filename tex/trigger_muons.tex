@@ -1,14 +1,13 @@
 \subsection{Trigger for the muon final states}
 
 Events with the muon final states are selected using the \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} trigger.
-In the level-1 trigger (L1), it requires two muon regions of interest (RoI) with $p_T > 6$~GeV and opening angle $\Delta R < 1.5$.
-In the level-2 trigger, it requires a di-muon vertex with $\chi^2 < 20$ and $0.1 < m_{\mu\mu} < 6.5$~GeV,
-two opposite-charged tracks with mass in range $0.1 - 15$~GeV and fit to a common vertex with $\chi^2 < 20$.
-In the Event Filter, the $B_d \rightarrow K^{*0} \mu^+ \mu^-$ vertex is reconstructed with the requirements
-of $B_d$-vertex $\chi^2 < 60$, $K^{*0}$-vertex $\chi^2 < 400$, $m_{B_d} \in [4.6, 5.9]$~GeV and $m_{K^{*0}} \in [0.7, 1.1]$~GeV.
+The level-1 (L1) trigger identifies two regions of interest (RoI) with $p_T > 6$~GeV and opening angle $\Delta R < 1.5$.
+The level-2 trigger requires a di-muon vertex with $\chi^2 < 20$ and $0.1 < m_{\mu\mu} < 6.5$~GeV,
+two opposite-charged tracks fitted to a common vertex with $\chi^2 < 20$ and mass in range $0.1 - 15$~GeV.
+In the Event Filter, the $B^0_d \rightarrow K^{*0} \mu^+ \mu^-$ vertex is reconstructed with  $B^0_d$-vertex $\chi^2 < 60$, $K^{*0}$-vertex $\chi^2 < 400$, $m_{B_d} \in [4.6, 5.9]$~GeV and $m_{K^{*0}} \in [0.7, 1.1]$~GeV.
 
 The trigger efficiency, defined as the ratio of events firing the trigger to those passing the offline selections,
-is a crucial part of the total efficiency. For a normal di-muon trigger, the strategy is to factorise the efficiency as 
+is a crucial part of the total efficiency. It is modelled by the MC sample in bins of $p_T$ and charge-signed pseudorapidity $q\eta$ of the two muons, $\Delta R$ and rapidity of the di-muon, and  di-meson $p_T$ of the di-tracks. The mismodelling of MC trigger efficiency can be corrected by the efficiency scale factor. The scale factor consist of two parts. The first part is obtained from the official tool for measurement of B-physics trigger efficiency scale factors. For a normal di-muon trigger, the strategy of the tool is to factorise the efficiency as 
 
 \begin{equation}
 \varepsilon_{\mu\mu} = \varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY})\times c_{\mu\mu}(\Delta R, |y^{\mu\mu}|),
@@ -47,6 +46,10 @@ where $c_{\Delta R}(\Delta R, |y^{\mu\mu}|)$ is the $\Delta R$ correction accoun
 efficiency at small $\Delta R$ where the RoIs can be overlapping, and $c_a(|y^{\mu\mu}|)$
 is the asymptotic correction accounting for the loss of efficiency due to the opposite charge
 and vertex requirement.
+
+The $\Delta R$ correction $c_{\Delta R}$, asymptotic correction $c_a$ and single muon efficiency $\varepsilon_{\text{muX}}$ are obtained by different methods described below using $J/\psi \rightarrow \mu^+ \mu^-$ sample. The scale factor is then computed as the ratio of the data efficiency to MC efficiency .
+
+The second part of the scale factor handles the track selection of \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6}. The track selection efficiency is obtained from the fraction of $B^0_d \rightarrow K^{*0} J/\psi(\mu^+ \mu^-)$ candidates passing both \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} and \texttt{HLT\_mu11\_mu6\_bDimu} among those only being required to pass \texttt{HLT\_mu11\_mu6\_bDimu}.
 
 \subsubsection{$\Delta R$ correction}
 The $\Delta R$ correction is obtained by di-muon tag-and-probe method.
@@ -209,9 +212,6 @@ is matched to the mu6 leg, the following selections are added:
   or rejected by both \texttt{HLT\_mu6\_nomucomb} and \texttt{HLT\_mu11\_mu6\_bJpsimumu}
 \end{itemize} 
 
-These selections are rather empirical and cannot entirely remove the candidates in which
-the tag and probe muon is actually matched to the other legs, but the systematic effect
-can be evaluated through the closure test and include as part of the systematic uncertainties.
 Figure~\ref{fig:Run1_singlemueffmap} shows the 2D maps of efficiency in terms of $p_T$ and $q\eta$. 
 
 
@@ -224,7 +224,3 @@ Figure~\ref{fig:Run1_singlemueffmap} shows the 2D maps of efficiency in terms of
   the Run-1 method using \texttt{HLT\_mu11\_mu6\_bJpsimumu} as the di-muon trigger.}
 \label{fig:Run1_singlemueffmap}
 \end{figure}
-
-
-
-
