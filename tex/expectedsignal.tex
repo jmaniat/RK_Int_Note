@@ -1,0 +1,118 @@
+We derived a formula to extract the expected number of events for the
+non-resonant channel:
+
+\begin{align}
+n^{\textrm obs}_{\textrm Non} &= 
+n^{\textrm obs}_{\textrm Res}
+\frac{\mathcal{B}(B\to K^*ee)}{\mathcal{B}(B\to K^*J/\psi)\mathcal{B}(J/\psi\to ee)}
+\frac{n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}
+\frac{\epsilon^{\textrm gen}_{{\textrm Non},B}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}}}{n_{{\textrm Non},B}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}} + n_{{\textrm Non},\bar{B}}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},B}}}{
+n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}
+\frac{\epsilon^{\textrm gen}_{{\textrm Res},B}\epsilon^{\textrm gen}_{{\textrm Res},\bar{B}}}{n_{{\textrm Res},B}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Res},\bar{B}} + n_{{\textrm Res},\bar{B}}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Res},B}}}
+\end{align}
+
+We then define the various part of this formula based on the nature of
+the information used. First we consider the external inputs consisting
+in the branching ratios of the signal and the resonance channel.
+
+\begin{align}
+{\textrm E}(\mathcal{B})_{\ell\ell} &= 
+\frac{\mathcal{B}(B\to K^*\ell\ell)}{\mathcal{B}(B\to K^*J/\psi)\mathcal{B}(J/\psi\to \ell\ell)}
+\end{align}
+
+This ratio is calculated using the PDG values:
+
+\begin{align}
+\mathcal{B}(B\to K^* J/\psi) &= (1.27\pm 0.05)\times 10^{-3}\\
+\mathcal{B}(B\to K^* ee) &= (1.04 \pm {0.18})\times 10^{-6}\\
+\mathcal{B}(B\to K^*\mu\mu)&= (9.4\pm0.5 )\times 10^{-7}\\
+\mathcal{B}(J/\psi \to ee) &= (5.971\pm 0.032) \times 10^{-2}\\
+\mathcal{B}(J/\psi \to \mu\mu) &= (5.961\pm 0.033)\times 10^{-2}
+\end{align}
+
+and we obtain:
+
+\begin{align}
+{\textrm E}(\mathcal{B}_{ee}) = 0.0137 \pm 0.0024\\
+{\textrm E}(\mathcal{B}_{\mu\mu}) = 0.0124 \pm 0.0008
+\end{align}
+
+
+\begin{align}
+  P({\textrm Non})_{\ell\ell} = \frac{\epsilon^{\textrm gen}_{{\textrm Non},B}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}}}{n_{{\textrm Non},B}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}} + n_{{\textrm Non},\bar{B}}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},B}} =
+  \frac{1}{\frac{n_{{\textrm Non},B}^{\textrm AOD}}{\epsilon^{\textrm gen}_{{\textrm Non},B}}+\frac{n_{{\textrm Non},\bar{B}}^{\textrm AOD}}{\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}}}}
+\end{align}
+
+
+\begin{table}[!tbp]
+\begin{center}
+\smallskip
+%\vspace*{-3.cm}
+\begin{tabular}{|l|c|c|} 
+\hline
+%& & \\[-7mm]
+%$(b\rightarrow u)/(b\rightarrow c)$ & $\bar \rho^2 + \bar \eta^2$ & $\bar \Lambda, \lambda_1, F(1),$ ... \\[4mm]
+Inputs to the P ratios: & & \\
+\hline
+Non-resonant channel & & \\
+\hline
+\hline
+generator efficiencies & B & $\overline{B}$ \\
+\hline
+electron channel & $0.05335$ & $0.05289$ \\
+muon channel & $0.06442$ & $0.06403$ \\
+\hline
+Number of events & B & $\overline{B}$ \\
+\hline
+electron channel & $6441500$ & $4976000$ \\
+muon channel & $1498000$ & $1499000$ \\
+\hline
+\hline
+Resonant channel & & \\
+\hline
+\hline
+generator efficiencies & B & $\overline{B}$ \\
+\hline
+electron channel & $0.05850$ & $0.05802$ \\
+muon channel & $0.06137$ & $0.06084$ \\
+\hline
+Number of events & B & $\overline{B}$ \\
+\hline
+electron channel & $447500$ & $449500$ \\
+muon channel & $436000$ & $449500$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+%6441500/0.05335
+%120740394
+%sqrt(0.05335*(1-0.05335)/120740394)
+%.00002045199308136006
+%0.00002/0.05335
+%.00037488284910965323
+
+\begin{align}
+{\textrm P}(\textrm Non)_{ee} = 0.466 \times 10^{-8}\\
+{\textrm P}(\textrm Res)_{ee} = 6.495 \times 10^{-8}\\
+{\textrm P}(\textrm Non)_{\mu\mu} = 2.143 \times 10^{-8}\\
+{\textrm P}(\textrm Res)_{\mu\mu} = 6.900 \times 10^{-8}
+\end{align}
+
+
+\begin{align}
+n^{\textrm obs}_{\textrm Non} &= 
+n^{\textrm obs}_{\textrm Res}
+{\textrm E}(\mathcal{B})
+\frac{n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}}{n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}}
+\frac{P({\textrm Non})}{P({\textrm Res})}
+\end{align}
+
+
+\begin{align}
+  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}_{ee} = \\
+  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}_{ee} = \\
+  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}_{\mu\mu} = \\
+  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}_{\mu\mu} = 
+\end{align}
