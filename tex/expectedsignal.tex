@@ -1,5 +1,6 @@
 We derived a formula to extract the expected number of events for the
-non-resonant channel:
+non-resonant channel needed pre-unblinding to test the signal extraction
+strategy:
 
 \begin{align}
 n^{\textrm obs}_{\textrm Non} &= 
@@ -33,25 +34,26 @@ This ratio is calculated using the PDG values:
 and we obtain:
 
 \begin{align}
-{\textrm E}(\mathcal{B}_{ee}) = 0.0137 \pm 0.0024\\
-{\textrm E}(\mathcal{B}_{\mu\mu}) = 0.0124 \pm 0.0008
+{\textrm E}(\mathcal{B}_{ee}) = 0.0137 \pm 0.0024 (17.5\%)\\
+{\textrm E}(\mathcal{B}_{\mu\mu}) = 0.0124 \pm 0.0008 (6.5\%)
 \end{align}
 
+Secondly we consider the efficiencies related to the generation
+filters:
 
 \begin{align}
   P({\textrm Non})_{\ell\ell} = \frac{\epsilon^{\textrm gen}_{{\textrm Non},B}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}}}{n_{{\textrm Non},B}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}} + n_{{\textrm Non},\bar{B}}^{\textrm AOD}\epsilon^{\textrm gen}_{{\textrm Non},B}} =
   \frac{1}{\frac{n_{{\textrm Non},B}^{\textrm AOD}}{\epsilon^{\textrm gen}_{{\textrm Non},B}}+\frac{n_{{\textrm Non},\bar{B}}^{\textrm AOD}}{\epsilon^{\textrm gen}_{{\textrm Non},\bar{B}}}}
 \end{align}
 
+The numbers needed to calculate the ratios above for the electron
+and the muon final states are in Table~\ref{tab:generation}.
 
 \begin{table}[!tbp]
 \begin{center}
 \smallskip
-%\vspace*{-3.cm}
 \begin{tabular}{|l|c|c|} 
 \hline
-%& & \\[-7mm]
-%$(b\rightarrow u)/(b\rightarrow c)$ & $\bar \rho^2 + \bar \eta^2$ & $\bar \Lambda, \lambda_1, F(1),$ ... \\[4mm]
 Inputs to the P ratios: & & \\
 \hline
 Non-resonant channel & & \\
@@ -82,16 +84,23 @@ electron channel & $447500$ & $449500$ \\
 muon channel & $436000$ & $449500$ \\
 \hline
 \end{tabular}
+\caption{Numbers of generated events and generation efficiencies for
+the non-resonant and resonant signals.}
+\label{tab:generation}
 \end{center}
 \end{table}
 
-
+%% to get to the original unfiltered number of generated events
+%% from the generation efficiency and the number of actually generated events.
 %6441500/0.05335
 %120740394
 %sqrt(0.05335*(1-0.05335)/120740394)
 %.00002045199308136006
 %0.00002/0.05335
 %.00037488284910965323
+%% the error is very small so we consider these numbers without errors
+
+The resulting ratios from the generation efficiencies are as follow:
 
 \begin{align}
 {\textrm P}(\textrm Non)_{ee} = 0.466 \times 10^{-8}\\
@@ -100,7 +109,7 @@ muon channel & $436000$ & $449500$ \\
 {\textrm P}(\textrm Res)_{\mu\mu} = 6.900 \times 10^{-8}
 \end{align}
 
-
+We now can rewrite the main formula in a simplify way:
 \begin{align}
 n^{\textrm obs}_{\textrm Non} &= 
 n^{\textrm obs}_{\textrm Res}
@@ -108,11 +117,71 @@ n^{\textrm obs}_{\textrm Res}
 \frac{n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}}{n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}}
 \frac{P({\textrm Non})}{P({\textrm Res})}
 \end{align}
+where we are left to input the number of events after
+the final selection.
 
+%\begin{align}
+%  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}\mbox{ }_{ee} = 34867\\
+%  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}\mbox{ }_{ee} = 31576\\
+%  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}\mbox{ }_{\mu\mu} = \\
+%  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}\mbox{ }_{\mu\mu} = 
+%\end{align}
+
+Assuming a GNN working point for the electron final states
+and a BDT working point for the muon final states
+(give a couple of numbers to characterise the WP:
+signal efficiency and background efficiency?),
+we obtain the following number of events:
+\begin{align}
+  n_{{\textrm Non},{B+\bar B}}^{\textrm MC,sel}(ee) &= 34867\\
+  n_{{\textrm Res},{B+\bar B}}^{\textrm MC,sel}(ee) &= 31576\\
+  n_{{\textrm Non},B+\bar{B}}^{\textrm MC, sel}(ee,weighted) &= 838 \pm 29\\
+  n_{{\textrm Res},B+\bar{B}}^{\textrm MC, sel}(ee,weighted) &= 841 \pm 28\\
+  n_{{\textrm Non},{B+\bar B}}^{\textrm MC,sel}(\mu\mu) &= 4.3 \times 10^4\\
+  n_{{\textrm Res},{B+\bar B}}^{\textrm MC,sel}(\mu\mu) &= 7.9 \times 10^4\\
+  n_{{\textrm Non},B+\bar{B}}^{\textrm MC, sel}(\mu\mu,weighted) &=  \pm \\
+  n_{{\textrm Res},B+\bar{B}}^{\textrm MC, sel}(\mu\mu,weighted) &=  \pm 
+\end{align}
+where we include the raw numbers of events passing in the MC and
+also the weighted numbers of events. We should use the weighted numbers,
+when available.
+
+From the resonant fit to the B invariant mass we obtain the follow
+number of events:
+\begin{align}
+  n^{\textrm obs}_{\textrm Res}(ee) &= 12359 \pm 217 \\
+  n^{\textrm obs}_{\textrm Res}(\mu\mu) &= 9.4 \times 10^4 \pm ??\\
+\end{align}
+
+Applying the formula we then obtain the following number of expected
+events for the non-resonant channel:
+\begin{align}
+  n^{\textrm exp}_{\textrm Non}(ee) &= 24 \pm 10 (40\%)\\
+  n^{\textrm exp}_{\textrm Non}(\mu\mu) &= 210 (15\%)\\
+\end{align}
+
+We can now proceed to estimate the factors contributing to the
+extraction of R(K*):
 
 \begin{align}
-  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}\mbox{ }_{ee} = \\
-  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}\mbox{ }_{ee} = \\
-  n_{{\textrm Non},B+\bar B}^{\textrm MC.sel}\mbox{ }_{\mu\mu} = \\
-  n_{{\textrm Res},B+\bar B}^{\textrm MC.sel}\mbox{ }_{\mu\mu} = 
+  R(K^\ast) &= \frac{\frac{\mathcal{B}(B\to K^\ast\mu\mu)}{\mathcal{B}(B\to K^\ast J/\psi)}}
+  {\frac{\mathcal{B}(B\to K^\ast ee)}{\mathcal{B}(B\to K^\ast J/\psi)}}
 \end{align}
+
+
+For electrons:
+\begin{align}
+  {\textrm{ratio of gen efficiencies non/res}} &=  0.0535/0.0585 = 0.92  \\
+  {\textrm{ratio of preselection efficiencies non/res}} &= 0.032/0.155 = 0.21 \\
+  {\textrm{ratio of trigger efficiencies non/res}} &=  0.0295/0.0317 = 0.93\\
+  {\textrm{ratio of GNN efficiencies non/res}} &=   \\
+\end{align}
+
+For muons:
+\begin{align}
+  {\textrm{ratio of gen efficiencies non/res}} &=   0.0644/0.0614 = 1.05  \\
+  {\textrm{ratio of preselection efficiencies non/res}} &=  \\
+  {\textrm{ratio of trigger efficiencies non/res}} &=  \\
+  {\textrm{ratio of GNN efficiencies non/res}} &=  \pm \\
+\end{align}
+
