@@ -36,6 +36,8 @@
 %  minimal               Minimal set of packages.
 %  default               Standard set of packages.
 %  full                  Full set of packages.
+\usepackage{slashed}
+\usepackage{amsmath}
 %-------------------------------------------------------------------------------
 % Style file with biblatex options for ATLAS documents.
 \usepackage{atlasbiblatex}
@@ -218,7 +220,11 @@ The list should be printed either here or before the Table of Contents.
 \input{tex/app-data.tex}
 
 \clearpage
+\section{(Pileup and) Prescale Reweighting for Electron Triggers}
+\label{sec:prw-for-electron-triggers}
+\input{tex/app-prw-electron-triggers.tex}
 
+\clearpage 
 \section{Extensive studies on backgrounds}
 \label{sec:app:bkgdvij}
 \input{tex/app-background-misc.tex}
