@@ -1,0 +1,256 @@
+\DCM{TODO: The treatment of the seeded electron chains that collected some luminosity before the unseeded chains came online.} %
+\\
+\DCM{TODO: Tone down the self-congratulatory language coming from this writeup originally having been written for a PhD progress evaluation committee.} %
+The prescales of triggers are not simulated in the MC sample - mainly not to lose statistics but also because the anticipated prescales and the actual prescales during data-taking would often be different. %
+Thus, event-by-event weights need to be applied to the events in the MC samples to mimic the effect of the prescales in the data. %
+The usual approach adopted in ATLAS to perform such reweighting is outlined in \cite{Buttinger:2014726}, however, this approach assumes that none of the trigger chains that are being used to collect data have overlapping L1 items. %
+The defining characteristic of the unseeded electron trigger chains, described in detail in \ref{subsec:trigger-for-electron}, was to seed the HLT item of the trigger chain on any active L1 item in the entire trigger menu of ATLAS, rather than seeding the HLT item on just one L1 item as it is usually done otherwise. %
+Thus, special care is needed in using them in the offline analysis. %
+In particular, since both of the electron trigger chains share all of the L1 items, the interactions between the prescales of the L1 items as well as the prescales of the HLT items themselves need to be carefully considered while correcting the MC to reflect the prescales applied during data-taking.%  
+\subsection{The Issue of Correlated Prescales}
+\label{subsec:issue-of-correlated-prescales}
+The basic rules for combining prescales of triggers, as outlined in \cite{Buttinger:2014726}, are as follows:
+\begin{itemize}
+    \item The effective prescale $P_Z$ of a logical AND of two triggers $X,Y$ is given by
+    %\DM{Relevant for a full trigger chain which needs to be treated as the logical AND of the L1 and the HLT parts. This point that in the context of prescale reweighting, treating the L1 and the HLT parts separately is important because the prescales for them are applied separatedly is emphasized in the appendix.}
+    \begin{align}
+    \label{eq:buttinger-and}
+    \frac{1}{P_Z}=\frac{1}{P_X}\cdot\frac{1}{P_Y}
+    \end{align}
+    \item The effective prescale $P_Z$ of a logical OR of two triggers $X, Y$ is given by 
+    \begin{align}
+    \label{eq:buttinger-or}
+    \frac{1}{P_Z}=1-\bigg(1-\frac{1}{P_X}\bigg)\bigg(1-\frac{1}{P_Y}\bigg)
+    \end{align} 
+\end{itemize}
+where $P_{X,Y}$ are the prescales of the two triggers $X,Y$. %
+Notice that while analyses usually (if not always) employ a logical OR of trigger chains to collect data, the logical structure of a trigger chain itself is a logical AND between the HLT part and the L1 part of the chain. Thus, the rule for combining prescales of triggers in a logical AND is always relevant. %
+It is intuitively clear that these rules can only be applied if the enactment of prescales is independent between the triggers $X$ and $Y$. %
+For example, consider the following two stylized trigger chains:  
+\begin{itemize}
+    \item $X=\texttt{HLT\_e60\_L1\_EM22}$ (a trigger requiring an EM L1 object (an electron or a photon) with $p_{\textrm T}>22$ GeV and an HLT electron with $p_{\textrm T}>60$ GeV)
+    \item $Y=\texttt{HLT\_2e60\_L1\_EM22}$ (a trigger requiring two EM L1 objects with $p_{\textrm T}>22$ GeV and an HLT electron with $p_{\textrm T}>60$ GeV)
+\end{itemize}
+If $\texttt{L1\_EM22}$ is prescaled at $2$ and the HLT parts of both the chains are running unprescaled, the effective prescale for $X\ \vert \vert\ Y$ is simply $2$ since there is a $50\%$ probability that  $X\ \vert \vert\ Y$ is ``prescale-wise online'' -- corresponding to the $50\%$ probability that $\texttt{L1\_EM22}$ is ``prescale-wise online''\footnote{Since the prescales are applied \emph{after} running the triggers for L1 triggers, it might be slightly misleading to use the phrase ``prescale-wise online'', however, hopefully, the intended meaning is communicated.}. %
+However, naively applying \eqref{eq:buttinger-or} will lead one to conclude that the effective prescale of $X\ \vert\vert\ Y$ should be $4/3$. %
+Notice that the effective prescale of $X\ \vert\vert\ Y$ would indeed have been $4/3$ if, for example, $Y$ had been $\texttt{HLT\_2e60\_L1\_EM18}$ with $\texttt{L1\_EM18}$ prescaled at $2$ and everything else unchanged. %
+Thus, it is clear that we need to be careful whenever we are dealing with HLT chains that, either fully or partially, share L1 seeds. %
+In the electron channel of the analysis, we collect data using the logical OR combination of the HLT chains $\texttt{HLT\_e5\_lhvloose\_nod0\_bBeexM6000t}$ and $\texttt{HLT\_2e5\_lhvloose\_nod0\_bBeexM6000t}$. %
+As mentioned earlier, both of these trigger chains are seeded on the entire L1 menu of Run~2 (with $\sim$~500 L1 items), i.e., fully share the L1 seeding. %
+We thus cannot straightforwardly use \eqref{eq:buttinger-or} to deal with the logical OR of the HLT chains of interest. %
+\\\\
+We describe our approach to dealing with this issue in the next subsection \ref{subsec:app-prw-math}. %
+However, to motivate the approach, we simply mention that the underlying idea is to recursively use the following basic probability rules on the trigger expression of interest:
+\begin{align}
+    P(X || Y)&=P(X)+P(Y)-P(X\cap Y)\\
+    P(XY)&=P(X)\cdot P(Y),
+\end{align}
+where the second of these rules is true only if $X$ and $Y$ are independent. %
+In the context of trigger expressions, the prescales of each of the HLT items as well as the prescales of each of the L1 items are mutually independent. %
+Thus, for example, for some HLT items $A$, $B$ and an L1 item $X$, while $P(AX || BX)\neq (P(AX)+ P(BX ) -  P(AX )   P(BX )=P(A)P(X)+P(B)P(X)-P(A)P(B)P^2(X))$, 
+\begin{align}
+    P(AX || BX ) &= P(AX)+P(BX)-P(AXBX)\\
+    &= P(AX)+P(BX)-P(ABX)\\
+    &= P(A)P(X)+P(B)P(X)-P(A)P(B)P(X)
+\end{align}
+It is intuitively clear that the probability term $P(X)$ representing the prescale weight of a trigger $X$ should be $1/P_X$ where $P_X$ is the prescale of the trigger $X$. While we are using the letter $X$ here with an ambiguous meaning (namely, it's used both as a boolean variable representing a trigger decision and as some sort of a set such that $P(X)$ is a meaningful term), the precise correspondence between the boolean variables representing trigger decisions and the corresponding sets of events that are relevant to the discussion of prescale weights is established in the following. %
+\subsection{Solution to the Issue of Correlated Prescales}
+\label{subsec:app-prw-math}
+%We use boolean variables to represent the ``prescale enaction'' for a given trigger combination. %
+To make the discussion unambiguous, we first introduce (or recall) a few definitions and some notation, along with deriving useful mathematical identities.
+\subsubsection{Preliminary Definitions, Notation, and Algebraic Identities}
+\label{subsubsec:app-prw-math-defs-and-identities}
+\textbf{Trigger Element}: An L1 item or the HLT part of a trigger chain. Notice that the prescales are applied to an L1 item or the HLT part of a trigger chain, not to a trigger chain as a whole. The prescale of a trigger chain is thus emergent from the prescales of its trigger elements. %
+We will use a \texttt{mathcal} uppercase letter (e.g., $\mathcal{X}$) to denote a generic trigger chain or a logical composition of generic trigger chains (referred to as a trigger combination hereafter) and a standard uppercase letter (e.g., $X$) to denote a trigger element. %
+\\\\
+\textbf{Trigger Decision}: This is simply the trigger decision for a given trigger combination \textbf{before} applying prescales. We will use $t^i_\mathcal{X}$ to denote the trigger decision for a trigger combination $\mathcal{X}$ in an event $i$.\\\\
+\textbf{Prescale Decision}: If a trigger combination is precluded from firing due to the application of prescales, then the prescale decision for that trigger combination is $0$; otherwise $1$. We will use $u_\mathcal{X}^i$ to denote the prescale decision for a trigger combination $\mathcal{X}$ in an event $i$.
+\\\\
+\textbf{Passing Set of a Trigger Combination}: The set of all events for which the trigger decision is $1$ for a given trigger combination. We will use $T_\mathcal{X}$ to denote the passing set of a trigger combination $\mathcal{X}$, i.e., $T_{\mathcal{X}}=\{i\ \vert\ t^i_\mathcal{X}=1\}$. \\\\
+\textbf{Unprescaled Set of a Trigger Element}: The set of all events for which the prescale decision is $1$ for a given trigger element. We will use $U_X$ to denote the unprescaled set of a trigger element $X$, i.e., $U_X=\{i\ \vert \ u^i_X=1\}$.
+\\\\
+We adopt the notation wherein the logical AND between triggers is expressed as a product, and the logical OR between triggers is expressed as a sum:
+\begin{subequations}
+\label{eq:composition-set-operations}
+\begin{align}
+    U_{\mathcal{X}+\mathcal{Y}}&\equiv\{i\ \vert\ u^i_\mathcal{X}\lor u^i_{\mathcal{Y}}=1\}=U_\mathcal{X}\cup U_\mathcal{Y}\\
+    U_{\mathcal{XY}}&\equiv\{i\ \vert\ u^i_\mathcal{X}\land u^i_{\mathcal{Y}}=1\}=U_\mathcal{X}\cap U_\mathcal{Y}\\
+    T_{\mathcal{X}+\mathcal{Y}}&\equiv\{i\ \vert\ t^i_\mathcal{X}\lor t^i_{\mathcal{Y}}=1\}=T_\mathcal{X}\cup T_\mathcal{Y}\\
+    T_{\mathcal{XY}}&\equiv\{i\ \vert\ t^i_\mathcal{X}\land t^i_{\mathcal{Y}}=1\}=T_\mathcal{X}\cap T_\mathcal{Y}
+\end{align}
+\end{subequations}
+Or, in general, if a trigger combination $\mathcal{X}$ can be expressed as a logical composition $f$ of an ordered set of trigger chains $[\mathcal{A}_k]$, i.e., $\mathcal{X}=f([\mathcal{A}_k])$, then the same logical composition also describes $t_\mathcal{X}^i$, $u_\mathcal{X}^i$ in terms of $[t_{\mathcal{A}_k}^i]$, $[u_{\mathcal{A}_k}^i]$ respectively. %
+For example, if $\mathcal{A}=AX+BY$ then $t^i_\mathcal{A}=(t^i_A\land t^i_X)\lor (t^i_B\land t^i_Y)$, etc. %
+This can be made more explicit: a generic trigger combination that can be created out of the $n$ trigger chains in the ordered set $[\mathcal{A}_k]$ (where $k\in \mathbb{N}_{\leq n}$) can be expressed as
+\begin{align}
+\mathcal{X}&=\sum_{l=1}^{2^n} e_{l}\bigg(\Pi_{k=1}^{n}\mathcal{A}_k^{c_{kl}}\bigg)
+\end{align}
+where $c_{kl}\in\{0,1\}$ and $e_l\in\{0,1\}$, i.e., the relevant logical composition is parameterized by $2^n+n2^n$ boolean parameters. To say that the same logical composition that describes $\mathcal{X}$ in terms of $[\mathcal{A}_k]$ also describes $t_\mathcal{X}^i$, $u_\mathcal{X}^i$ in terms of $[t_{\mathcal{A}_k}^i]$, $[u_{\mathcal{A}_k}^i]$ respectively is to say that 
+\begin{subequations}
+\label{eq:generic-composition-boolean-operations}
+\begin{align}
+    t_\mathcal{X}^i&=\lor_{l=1}^{2^{n}} e_l\bigg(\land_{k=1}^{n}{(t_{\mathcal{A}_k}^i)}^{c_{kl}}\bigg)\\
+    u_\mathcal{X}^i&=\lor_{l=1}^{2^{n}} e_l\bigg(\land_{k=1}^{n}{(u_{\mathcal{A}_k}^i)}^{c_{kl}}\bigg)
+\end{align}
+\end{subequations}
+We now introduce a few more definitions:\\\\
+\textbf{Unprescaled Passing Set of a Trigger Element}: For a trigger element $X$, this is the set of all events where both the prescale decision and the trigger decision are $1$. We will use $V_X$ to denote the unprescaled passing set of a trigger element $X$, i.e., $V_X=\{i\ \vert\ u^i_X\land t^i_X=1\}$.\\\\
+\textbf{Unprescaled Passing Set of a Trigger Combination}: For a trigger combination $\mathcal{X}=f([A_k])$ where $A_k$s are trigger elements and $f$ is some logical composition thereof, the unprescaled passing set of $\mathcal{X}$ is given by $V_\mathcal{X}=\{i\vert f([u_{A_k}^i\land t^i_{A_k}])=1\}$. %
+For a trigger element $X$, 
+        \begin{align}
+            V_X=U_X\cap T_X
+        \end{align}
+However, for a trigger combination $\mathcal{X}=f([A_k])$, it is \textbf{NOT} generally true that $V_\mathcal{X}=U_\mathcal{X}\cap T_\mathcal{X}$. %
+It does hold tho that for a trigger combination $\mathcal{X}=f([A_k])$,
+        \begin{align}
+        V_\mathcal{X}=f([V_{A_k}])=f([U_{A_k}\cap T_{A_k}])
+        \end{align}
+For example, if $\mathcal{X}=A+B$ then $V_\mathcal{X}=(U_A\cap T_A)\cup (U_B\cap T_B)\neq (U_A\cup U_B)\cap (T_A\cup T_B)$. %
+Finally, just like \eqref{eq:composition-set-operations}, it holds that 
+        \begin{subequations}
+        \label{eq:composition-set-operations-on-v}
+        \begin{align}
+            V_\mathcal{X+Y}&=V_\mathcal{X}\cup V_\mathcal{Y}\\
+            V_\mathcal{XY}&=V_\mathcal{X}\cap V_\mathcal{Y}
+        \end{align}
+        \end{subequations}
+\\
+\textbf{Decision Sets of a Trigger Menu}: For a trigger menu constituted by an ordered set $[A_k]$ where $A_k$s are $n$ trigger elements, a trigger decision set $\mathcal{D}^{l}$ is defined as 
+    \begin{align}
+        \mathcal{D}^{l}\equiv\{i\ \vert\ t^i_{A_k}=d_{kl},\ \forall k\ \in \mathbb{N}_{\leq n}\} 
+    \end{align}
+where the parameter $l$, which indexes the set of all trigger decision sets of the menu, runs from $1$ to $2^n$ and $d_{kl}\in \{0,1\}$ (where $k\in \mathbf{N}_{\leq n}$) is the array of boolean numbers defining the decision set $\mathcal{D}^l$.  %
+Notice that we can write 
+        \begin{align}
+            \mathcal{D}^l=\cap_{q,\tilde{q}}T_{A_q}T^c_{A_{\tilde{q}}}
+        \end{align}
+where $q$ runs over the solutions of $d_{kl}=1$, i.e., $q\in \{k \vert d_{kl}=1, k\in \mathbf{N}_{\leq n}\}$ and $\tilde{q}$ runs over the solutions of $d_{kl}=0$, i.e., $\tilde{q}\in \{k \vert d_{kl}=0, k\in \mathbf{N}_{\leq n}\}$.
+Using this notation, we can write
+        \begin{subequations}
+        \label{eq:intersect-dec-and-v}
+        \begin{align}             
+        V_\mathcal{X}\cap \mathcal{D}^l&=f([U_{A_k}\cap T_{A_k}])\cap_{q,\tilde{q}}T_{A_q}T^c_{A_{\tilde{q}}}\\
+        &=\Big(\cup_{j}e_j\big(\cap_k (U_{A_k}\cap T_{A_k})^{c_{kj}}\big)\Big)\cap_{q,\tilde{q}}T_{A_q}T^c_{A_{\tilde{q}}}\\
+        &=\cup_{j}e_j\Big(\cap_k (U_{A_k}\cap T_{A_k})^{c_{kj}}\cap_{q,\tilde{q}}T_{A_q}T^c_{A_{\tilde{q}}}\Big)\\
+        &= \cup_{j\in\{m\vert d_{ml}=1\}} e_j \big(\cap_k U_{A_k}^{c_{kj}}\big) \cap_{q,\tilde{q}}T_{A_q}T^c_{A_{\tilde q}}\\
+        &= \cup_{j\in\{m\vert d_{ml}=1\}} e_j\big(\cap_k U_{A_k}^{c_{kj}}\big) \cap \mathcal{D}^l\\
+        &= \cup_{j}d_{jl}e_j\big(\cap_k U_{A_k}^{c_{kj}}\big) \cap \mathcal{D}^l
+        \end{align}
+        \end{subequations} 
+\\
+\textbf{Reduced Unprescaled Set of a Trigger Combination}: Notice that $U_\mathcal{X}=f([U_{A_k}])=\cup_j e_j\big(\cap_k U_{A_k}^{c_kj}\big)$. Taking a cue from \eqref{eq:intersect-dec-and-v}, we define a reduced unprescaled set of a trigger combination $\mathcal{X}$ w.r.t. a given decision set $\mathcal{D}^l$ as 
+    \begin{align}
+        \slashed{U}_\mathcal{X}(\mathcal{D}^l)\equiv \cup_{j}d_{jl}e_j\big(\cap_k U_{A_k}^{c_{kj}}\big)
+    \end{align}
+Notice that almost by construction:
+    \begin{align}
+        V_{\mathcal{X}}\cap \mathcal{D}^l = \slashed{U}_{\mathcal{X}}(\mathcal{D}^l)\cap \mathcal{D}^l
+    \end{align}
+Finally, just like \eqref{eq:composition-set-operations-on-v} and \eqref{eq:composition-set-operations}, it follows that 
+        \begin{subequations}
+        \label{eq:composition-set-operations-on-slashed-u}
+        \begin{align}
+            \slashed{U}_\mathcal{X+Y}(\mathcal{D}^l)&=\slashed{U}_\mathcal{X}(\mathcal{D}^l)\cup \slashed{U}_\mathcal{Y}(\mathcal{D}^l)\\
+            \slashed{U}_\mathcal{XY}(\mathcal{D}^l)&=\slashed{U}_\mathcal{X}(\mathcal{D}^l)\cap \slashed{U}_\mathcal{Y}(\mathcal{D}^l)
+        \end{align}
+        \end{subequations}
+\subsubsection{Definition of Prescale Weights}
+\label{subsubsec:app-prw-definition-of-prw-weights}
+With this machinery of definitions, we are finally able to define the prescale weights. We define the {\textbf{prescale weight of an event $i$ for a given trigger combination $\mathcal{X}$ as the conditional probability that it belongs to the unprescaled passing set $V_\mathcal{X}$ of the said trigger combination given the decision set $\mathcal{D}^l$ to which the event $i$ belongs}}. Before moving on, it is important to emphasize that the prescale weight of an event \textbf{does not} correspond to the probability that an event belongs to the unprescaled set of a trigger combination. For example, imagine that we use $A\vert\vert B$ to collect data with $A$ prescaled at 2 and $B$ running unprescaled. If $B$ is a ridiculously restrictive trigger and never fires, then it's clear that the prescale weight should be $1/2$ for every event that passes $A\vert\vert B$. However, every event would always belong to the unprescaled set of $A\vert\vert B$ since $B$ is running unprescaled. \\\\
+To introduce one final bit of notation, we notice that a given event $i$ unambiguously belongs to some specific decision set. Thus, we might as well specify the decision set to which a given event $i$ belongs by $\mathcal{D}^i$. This notation wouldn't be useful if one needs to run over all decision sets since two different events $i,j$ might belong to the same decision set. However, as far as the concern is unambiguously specifying a decision set, this notation is good enough. Equipped with this notation, we compute the prescale weight of an event $i$ for a given trigger combination $\mathcal{X}$, $w_{\mathcal{X}}^i$ as 
+\begin{align}
+\label{eq:prescale-weight-def}
+    w_{\mathcal{X}}^i&=\rho(V_\mathcal{X} \vert \mathcal{D}^{i})\\
+    &=\frac{\rho(V_\mathcal{X}\cap \mathcal{D}^{i})}{\rho(\mathcal{D}^{i})}\\
+    &=\frac{\rho\big(\slashed{U}_{\mathcal{X}}(\mathcal{D}^i)\cap \mathcal{D}^i\big)}{\rho(\mathcal{D}^{i})}\\
+    &=\rho\big(\slashed{U}_{\mathcal{X}}(\mathcal{D}^i)\big)
+\end{align}
+where we use $\rho$ instead of $P$ to denote probabilities as we reserve the latter to denote prescales. %
+We have thus shown that \textbf{the prescale weight of a trigger combination $\mathcal{X}$ in an event $i$ is simply the probability that the event $i$ belongs to the reduced unprescaled passing set of the trigger combination $\mathcal{X}$ w.r.t. the decision set $\mathcal{D}^i$ to which the event $i$ belongs.} %
+Finally, for the sake of completeness, we define the effective prescale of a trigger combination in a given event as the reciprocal of the prescale weight. 
+\subsubsection{Evaluation of the Prescale Weights}
+\label{subsubsec:app-prw-evaluation-of-prescale-weights}
+For a trigger element $X$, we can actually evaluate the expression \eqref{eq:prescale-weight-def}:
+\begin{align}
+\label{eq:weight-for-trigger-elements}
+    w_X^i&=\rho(\slashed{U}_X(\mathcal{D}^i))=\rho(t_X^iU_X)=t^i_X\rho(U_X)=\frac{t^i_X}{P_X}
+\end{align}
+where $t^i_X$ is the trigger decision for the trigger element $X$ and $P_X$ is the prescale of the trigger element $X$. For a generic trigger combination, we first want to rewrite its weight in terms of the weights of relevant trigger elements and then utilize \eqref{eq:weight-for-trigger-elements}. 
+\\\\
+To this end, we derive the basic rules of the composition of prescale weights. %
+\\\\
+\textbf{Rule $1$: $w^i_{\mathcal{A}+\mathcal{B}}=w^i_{\mathcal{A}}+w^i_{\mathcal{B}}-w^i_{\mathcal{AB}}$.} Utilizing the composition rules \eqref{eq:composition-set-operations-on-slashed-u} for the reduced unprescaled sets, we can write 
+\begin{subequations}
+\label{eq:sum-general}
+\begin{align}
+    w^i_{\mathcal{A}+\mathcal{B}}&=\rho_i(\slashed{U}_{\mathcal{A}+\mathcal{B}}(\mathcal{D}^i))\\
+    &=\rho_i\big(\slashed{U}_{\mathcal{A}}(\mathcal{D}^i)\cup \slashed{U}_{\mathcal{B}}(\mathcal{D}^i)\big)\\
+    &=\rho_i\big(\slashed{U}_{\mathcal{A}}(\mathcal{D}^i)\big)+\rho_i\big(\slashed{U}_{\mathcal{B}}(\mathcal{D}^i)\big)-\rho_i\big(\slashed{U}_{\mathcal{A}}(\mathcal{D}^i)\cap \slashed{U}_{\mathcal{B}}(\mathcal{D}^i)\big)\\
+    &=\rho_i\big(\slashed{U}_{\mathcal{A}}(\mathcal{D}^i)\big)+\rho_i\big(\slashed{U}_{\mathcal{B}}(\mathcal{D}^i)\big)-\rho_i\big(\slashed{U}_{\mathcal{A}\mathcal{B}}(\mathcal{D}^i)\big)\\
+    &=w^i_{\mathcal{A}}+w^i_{\mathcal{B}}-w^i_{\mathcal{AB}}
+\end{align}
+\end{subequations}
+\textbf{Rule $2$: Iff the enactment of prescales is independent between $\mathcal{A}$ and $\mathcal{B}$, $w^i_{\mathcal{A}\mathcal{B}}=w(\mathcal{A})w(\mathcal{B})$}. Again, utilizing the composition rules \eqref{eq:composition-set-operations-on-slashed-u} for the reduced unprescaled sets, we can write
+\begin{align}
+\label{eq:product-independent}
+    w^i_{\mathcal{A}\mathcal{B}}&=\rho_i(\slashed{U}_\mathcal{AB}(\mathcal{D}^i))\\
+    &=\rho_i\big(\slashed{U}_\mathcal{A}(\mathcal{D}^i)\cap \slashed{U}_\mathcal{B}(\mathcal{D}^i)\big)\\
+    &=\rho_i\big(\slashed{U}_\mathcal{A}(\mathcal{D}^i)\big)\rho_i\big(\slashed{U}_\mathcal{B}(\mathcal{D}^i)\big)\\
+    &=w^i_{\mathcal{A}}w^i_{\mathcal{B}}
+\end{align}
+where we assume that the prescale enactment is independent between $\mathcal{A}$ and $\mathcal{B}$ in order to write the penultimate equality. %
+In particular, for trigger elements $A, B$, it always holds that $\rho(\slashed{U}_A(\mathcal{D}^i)\cap \slashed{U}_B(\mathcal{D}^i))=\rho(\slashed{U}_A(\mathcal{D}^i))\rho(U_B(\mathcal{D}^i))$ unless $A, B$ belong to a coherently prescaled group\footnote{For triggers belonging to a common coherent prescale group, the enactment of prescales is fully correlated, i.e., every event either belongs to the unprescaled set of all of the triggers in the coherent prescale group or it doesn't belong to the unprescaled set of any of the triggers in the coherent prescale group.}\footnote{Unless otherwise stated, we assume that none of the triggers being discussed are in a coherent prescale group. This assumption is always true for L1 triggers. While HLT items can be in a coherent prescale group, neither of the triggers used for this analysis was in a coherent prescale group during Run~2.}. %
+However, even if $A, B$ are not coherently prescaled, for the HLT chains such as $\mathcal{A}=AX$ and $\mathcal{B}=BX$, it \textbf{does not} hold that $\rho(\slashed{U}_{\mathcal{A}\mathcal{B}}(\mathcal{D}^i))=\rho(\slashed{U}_{\mathcal{A}}(\mathcal{D}^i))\rho(\slashed{U}_{\mathcal{B}}(\mathcal{D}^i))$. %
+Using the relations \ref{eq:sum-general} and \ref{eq:product-independent}, the weights for any trigger combination can be computed recursively. %
+For example, if we are interested in the trigger combination $\mathcal{X}=\mathcal{A}+\mathcal{B}$, we can write
+\begin{align}
+w^i_\mathcal{X}&=w^i_{\mathcal{A}+\mathcal{B}}\\
+&=w^i_{\mathcal{A}}+w^i_{\mathcal{B}}-w^i_{\mathcal{AB}}\\
+&=w^i_{AX}+w^i_{BX}+w^i_{AXBX}\\
+&=w^i_{AX}+w^i_{BX}+w^i_{ABX}\\
+&=w^i_A w^i_X+w^i_B w^i_X+w^i_A w^i_B w^i_X\\
+&=\frac{t^i_At^i_X}{P_A P_X}+\frac{t^i_Bt^i_X}{P_B P_X}+\frac{t^i_At^i_Bt^i_X}{P_A P_B P_X}
+\end{align}
+Expectedly, this is different from the weight that we would have obtained if we had ignored the correlations between the prescales of $\mathcal{A}$ and $\mathcal{B}$ (arising out of the fact that they share a common L1 item), e.g., the formula utilized by the standard prescale reweighting tool \cite{Buttinger:2014726} would have given us
+\begin{align}
+    w^i_{\mathcal{X}}&=w^i_{\mathcal{A}}+w^i_{\mathcal{B}}-w^i_{\mathcal{AB}}\\
+    &=w^i_{\mathcal{A}}+w^i_{\mathcal{B}}-w^i_{\mathcal{A}}w^i_{\mathcal{B}}\\
+    &=w^i_{AX}+w^i_{BX}-w^i_{AX}w^i_{BX}\\
+    &=\frac{t^i_At^i_X}{P_A P_X}+\frac{t^i_Bt^i_X}{P_B P_X}-\frac{t^i_At^i_Bt^i_X}{P_A P_B P^2_X}
+\end{align}
+%A more complicated example:
+%For example, if the trigger combination we are interested in is $\mathcal{X}=A(X_1+X_2)+B(X_1+X_3)$, we can write $\mathcal{X}=AX_1+AX_2+BX_1+BX_3\implies$
+%\begin{align}
+%w(\mathcal{X})&=w(AX_1)+w(AX_2)+w(BX_1)+w(BX_3)\\
+%&-w(AX_1AX_2)-w(AX_1BX_1)-w(AX_1BX_3)\\
+%&-w(AX_2BX_1)-w(AX_2BX_3)-w(BX_1BX_3)\\
+%&+w(AX_1AX_2BX_1)+w(AX_1AX_2BX_3)\\
+%&+w(AX_2BX_1BX_3)-w(AX_1AX_2BX_1BX_3)\\
+%&=w(AX_1)+w(AX_2)+w(BX_1)+w(BX_3)\\
+%&-w(AX_1X_2)-w(ABX_1)-w(ABX_1X_3)\\
+%&-w(ABX_1X_2)-w(ABX_2X_3)-w(BX_1X_3)\\
+%&+w(ABX_1X_2)+w(ABX_1X_2X_3)\\
+%&+w(ABX_1X_2X_3)-w(ABX_1X_2X_3)\\
+%&=\frac{t_{A}}{P_AP_{X_1}}+\frac
+%\end{align}
+\subsubsection{Evaluation of the Prescale Weights for the Unseeded \texttt{BeeX} Triggers}
+\label{subsubsec:app-prw-evaluation-of-prescale-weights-for-beex}
+In the electron channel of the analysis, we are interested in the following trigger combination:
+\begin{align}
+    \mathcal{T}=A\mathcal{X}+B\mathcal{X}
+\end{align}
+where \begin{align}
+    A&=\texttt{HLT\_e5\_lhvloose\_nod0\_bBeexM6000t}\\
+    B&=\texttt{HLT\_2e5\_lhvloose\_nod0\_bBeexM6000t}\\
+    \mathcal{X}&=\sum_i X_i
+\end{align}
+where $i$ indexes all the L1 items in the trigger menu. We can thus write 
+\begin{align}
+    w^i_{\mathcal{T}}&=w^i_{A\mathcal{X}+B\mathcal{X}}\\
+    &=w^i_{A\mathcal{X}}+w^i_{B\mathcal{X}}-w^i_{AB\mathcal{X}}\\
+    &=w^i_{A}w^i_{\mathcal{X}}+w^i_{B}w^i_{\mathcal{X}}-w^i_Aw^i_Bw^i_{\mathcal{X}}\\
+    &=\big(w^i_{A}+w^i_{B}-w^i_Aw^i_B\big)\cdot w^i_{\mathcal{X}}\\
+    &=\bigg(\frac{t^i_A}{P_A}+\frac{t^i_B}{P_B}-\frac{t^i_At^i_B}{P_AP_B}\bigg)\cdot w^i_{\mathcal{X}}
+\end{align}
+where the $w^i_{\mathcal{X}}$ term needs to be further evaluated according to the rules derived in \eqref{eq:sum-general} and \eqref{eq:product-independent}. %
+However, this computation is conceptually straightforward since the enactment of prescales is always independent among all the L1 items. %
