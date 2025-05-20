@@ -1,61 +1,65 @@
 \subsection{Trigger for the muon final states}
 
-Events with the muon final states are selected using the \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} trigger.
-The level-1 (L1) trigger identifies two regions of interest (RoI) with $p_T > 6$~GeV and opening angle $\Delta R < 1.5$.
-The level-2 trigger requires a di-muon vertex with $\chi^2 < 20$ and $0.1 < m_{\mu\mu} < 6.5$~GeV,
-two opposite-charged tracks fitted to a common vertex with $\chi^2 < 20$ and mass in range $0.1 - 15$~GeV.
-In the Event Filter, the $B^0_d \rightarrow K^{*0} \mu^+ \mu^-$ vertex is reconstructed with  $B^0_d$-vertex $\chi^2 < 60$, $K^{*0}$-vertex $\chi^2 < 400$, $m_{B_d} \in [4.6, 5.9]$~GeV and $m_{K^{*0}} \in [0.7, 1.1]$~GeV.
+\subsubsection{Trigger choice}
+To simplify the calculation of the trigger efficiency, a single di-muon trigger is used to select the muon final states. Asymmetric triggers are not considered for the analysis as they introduce spikes in the distributions of the muon transverse momentum. Such features could negatively impact the performance of the training in the machine learning selection. Therefore, the best choice would be the symmetric, dedicated \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} trigger, which ensures smooth muon $p_T$ distributions.
+The L1 topological trigger \texttt{L1LFV-MU6} identifies two muons with $p_T > 6$~GeV and angular separation $\Delta R < 1.5$.
+At the HLT level, it requires a di-muon vertex with $\chi^2 < 20$ and invariant mass window $0.1 < m_{\mu\mu} < 6.5$~GeV, as well as a di-track vertex with $\chi^2 < 20$ and invariant mass window $0.1 < m_{tt} < 15$~GeV. In the final Event Filter (EF) stage, the $B^0_d \rightarrow K^{*0} \mu^+ \mu^-$ decay is reconstructed with vertex fit $\chi^2$ values less than 60 for the $B^0_d$ vertex, and less than 400 for $K^{*0}$ vertex. The candidates are also required to lie within the invariant mass windows $m_{B_d} \in [4.6, 5.9]$~GeV and $m_{K^{*0}} \in [0.7, 1.1]$~GeV.
 
-The trigger efficiency, defined as the ratio of events firing the trigger to those passing the offline selections,
-is a crucial part of the total efficiency. It is modelled by the MC sample in bins of $p_T$ and charge-signed pseudorapidity $q\eta$ of the two muons, $\Delta R$ and rapidity of the di-muon, and  di-meson $p_T$ of the di-tracks. The mismodelling of MC trigger efficiency can be corrected by the efficiency scale factor. The scale factor consist of two parts. The first part is obtained from the official tool for measurement of B-physics trigger efficiency scale factors. For a normal di-muon trigger, the strategy of the tool is to factorise the efficiency as 
+\subsubsection{Trigger efficiency scale factor}
 
-\begin{equation}
-\varepsilon_{\mu\mu} = \varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY})\times c_{\mu\mu}(\Delta R, |y^{\mu\mu}|),
-\end{equation}
-
-where $\varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY})$ is the efficiency for the single muon legs
-to identify the RoIs of the two muons, X and Y represent the $p_T$ thresholds of the two legs,
-and $c_{\mu\mu}(\Delta R, |y^{\mu\mu}|)$ is the di-muon correction accounting for the inefficiency due to di-muon effect.
-
-Assuming $\text{Y} > \text{X}$, the first term can be further broken down as
+The trigger efficiency $\varepsilon_{\text{trig}}$, defined as the fraction of events that pass the trigger requirements relative to those selected by the same offline selections, is a crucial part of the overall efficiency. The fraction can be calculated directly using the $B^0_d$ signal MC samples. However, to account for the possible discrepancies between the simulation and the collected data, the efficiency extracted from MC has to be corrected by a scale factor (SF):
 
 \begin{equation}
-\begin{aligned}
-  &\varepsilon(\mu_1, \mu_2 \leftrightarrow \text{muX, muY}) \\
-  &= \varepsilon_{\text{muY}}(1)[\varepsilon_{\text{muX}}(2)-\varepsilon_{\text{muY}}(2)]
-    +\varepsilon_{\text{muY}}(2)[\varepsilon_{\text{muX}}(1)-\varepsilon_{\text{muY}}(1)]
-    +\varepsilon_{\text{muY}}(1)\varepsilon_{\text{muY}}(2) \\
-  &=\varepsilon_{\text{muX}}(1)\varepsilon_{\text{muY}}(2)
-    +\varepsilon_{\text{muX}}(2)\varepsilon_{\text{muY}}(1)
-    -\varepsilon_{\text{muY}}(1)\varepsilon_{\text{muY}}(2)
-\end{aligned},
+\varepsilon^{\text{corr}}_{\text{trig}} = \varepsilon_{\text{trig}} \times \text{SF}
 \end{equation}
 
-where $\varepsilon_{\text{muX}}(1) \equiv \varepsilon_{\text{muX}}(p^{(1)}_T, q\eta^{(1)})$ is the single muon efficiency.
-The charge-signed pseudorapidity $q\eta$ instead of normal pseudorapidity is used to account
-for the charge dependence of reconstruction in the toroidal magnetic field of the muon spectrometer.
-For symmetric triggers, this term simply reduces to $\varepsilon_{\text{muX}}(1)\varepsilon_{\text{muX}}(2)$.
-
-The di-muon correction can be broken down into
+The total scale factor can be decomposed into two parts:
 
 \begin{equation}
-c_{\mu\mu}(\Delta R, |y^{\mu\mu}|) = c_{\Delta R}(\Delta R, |y^{\mu\mu}|) \times c_a(|y^{\mu\mu}|),
+\text{SF} = \text{SF}_{\text{2mu6}} \times \text{SF}_{\text{trk}},
+\end{equation} 
+
+where $\text{SF}_{\text{2mu6}}$ accounts for the scale factor related to the pure di-muon selections, and $\text{SF}_{\text{trk}}$ represents the scale factor associated with the track reconstruction in the \texttt{bBmumuxv2} topological selections.
+
+The pure di-muon part $\text{SF}_{\text{2mu6}}$ is determined independently using reconstructed $J/\psi \to \mu^+\mu^-$ data and MC samples:
+
+\begin{equation}
+\text{SF}_{\text{2mu6}} = \dfrac{\varepsilon^{\text{data}}_{\text{2mu6}}}{\varepsilon^{\text{MC}}_{\text{2mu6}}}
 \end{equation}
 
-where $c_{\Delta R}(\Delta R, |y^{\mu\mu}|)$ is the $\Delta R$ correction accounting for the loss of
-efficiency at small $\Delta R$ where the RoIs can be overlapping, and $c_a(|y^{\mu\mu}|)$
-is the asymptotic correction accounting for the loss of efficiency due to the opposite charge
-and vertex requirement.
+The pure di-muon trigger efficiency can be factorized into three distinct contributions:
 
-The $\Delta R$ correction $c_{\Delta R}$, asymptotic correction $c_a$ and single muon efficiency $\varepsilon_{\text{muX}}$ are obtained by different methods described below using $J/\psi \rightarrow \mu^+ \mu^-$ sample. The scale factor is then computed as the ratio of the data efficiency to MC efficiency .
+\begin{equation}
+\varepsilon_{\text{2mu6}} = \varepsilon_{\text{mu6}}(1)\varepsilon_{\text{mu6}}(2)\times c_{\Delta R} \times c_a
+\end{equation}
 
-The second part of the scale factor handles the track selection of \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6}. The track selection efficiency is obtained from the fraction of $B^0_d \rightarrow K^{*0} J/\psi(\mu^+ \mu^-)$ candidates passing both \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} and \texttt{HLT\_mu11\_mu6\_bDimu} among those only being required to pass \texttt{HLT\_mu11\_mu6\_bDimu}.
+$\varepsilon_{\text{mu6}}$ denotes the efficiency for the \texttt{mu6} leg to identify the region of interest (RoI) of a muon. It is measured in bins of muon transverse momentum ($p_T$) and charge-signed pseudorapidity ($q\cdot\eta$). The product $\varepsilon_{\text{mu6}}(1)\varepsilon_{\text{mu6}}(2)$ represents the combined single muon efficiency for both muons. The $\Delta R$ correction $c_{\Delta R}$ accounts for the inefficiency arising from overlapping RoIs when the angular separation of the two muons is small. It is measured in bins of $\Delta R$ in three di-muon rapidity regions: barrel ($0 < |y^{\mu\mu}| < 1.05$), overlap ($1.05 < |y^{\mu\mu}| < 1.2$) and endcap ($|y^{\mu\mu}| > 1.2$). Finally, $c_a$ is the asymptotic correction accounting for the inefficiency due to di-muon vertexing and opposite-charge requirements. It is measured as a constant in the three rapidity regions separately. 
 
-\subsubsection{$\Delta R$ correction}
-The $\Delta R$ correction is obtained by di-muon tag-and-probe method.
-The tag muon should match to HLT muon of the tag triggers with $\Delta R < 0.01$,
-and match to L1 RoI by $\Delta R < \text{L1Cut}(p_T)$, where
+The three contributions are evaluated using different methods. The asymptotic correction $c_a$ is determined by counting the fraction of $J/\psi$ candidates that can pass a usual di-muon trigger relative to those that can pass a similar di-muon trigger without vertexing and opposite-charge constraints:
 
+\begin{equation}
+c_a(|y^{\mu\mu}|) = \dfrac{N_{J/\psi}(\text{\texttt{HLT\_mu11\_mu6\_bJpsimumu}})}{N_{J/\psi}(\text{\texttt{HLT\_mu11\_mu6\_bDimu\_novtx\_noos}})}
+\end{equation}
+
+The $J/\psi$ signal yields $N_{J/\psi}$ are obtained by fitting the di-muon invariant mass distribution in the range $2.7 < m_{\mu\mu} < 3.5$~GeV. The asymptotic correction reaches saturation rapidly as a function of $\Delta R$, and is therefore extracted by fitting a constant value in the region $\Delta R > 0.12$, as shown in Fig.~\ref{fig:fit_c_a}.
+
+\begin{figure}[h!]
+\center
+\hspace{-0.1cm}
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Barrel_HLT_mu11_mu6_bJpsimumu_Data18AllYear.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Overlap_HLT_mu11_mu6_bJpsimumu_Data18AllYear.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Endcap_HLT_mu11_mu6_bJpsimumu_Data18AllYear.eps} \\
+\hspace{-0.1cm}
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Barrel_HLT_mu11_mu6_bJpsimumu_undefined_period.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Overlap_HLT_mu11_mu6_bJpsimumu_undefined_period.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Endcap_HLT_mu11_mu6_bJpsimumu_undefined_period.eps} 
+\caption{The asymptotic correction $c_a$ as a function of $\Delta R$ for the trigger \texttt{HLT\_mu11\_mu6\_bJpsimumu} in data18 (top) and MC16e (bottom), shown in the three rapidity $|y^{\mu\mu}|$ regions: barrel ($0 < |y^{\mu\mu}| < 1.05$), overlap ($1.05 < |y^{\mu\mu}| < 1.2$), and endcap ($|y^{\mu\mu}| > 1.2$).  The fit is performed in the region $\Delta R > 0.12$.}
+\label{fig:fit_c_a}
+\end{figure}
+
+The $\Delta R$ correction is derived using di-muon tag-and-probe method. In this approach, the tag muon is required to match to the HLT muon of the tag trigger \texttt{HLT\_mu10\_bJpsi\_TrkPEB} within $\Delta R < 0.01$,  
+and also to match to the corresponding L1 RoI using muon parameters extrapolated to the trigger pivot. The L1 matching criterion is defined as $\Delta R < \text{L1Cut}(p_T)$, where
+ the $p_T$-dependent cut is given by
 \begin{equation}
 \text{L1Cut}(p_T) = \left\{
 \begin{aligned}
@@ -65,162 +69,90 @@ and match to L1 RoI by $\Delta R < \text{L1Cut}(p_T)$, where
 \right.
 \end{equation}
 
-In 2017, \texttt{HLT\_mu14\_bJpsi\_TrkPEB} and \texttt{HLT\_mu20\_bJpsi\_TrkPEB} are used as tag triggers
-for $c_{\Delta R}$. In 2018, only \texttt{HLT\_mu10\_bJpsi\_TrkPEB} is used as tag trigger.
-
-To correctly extract $\Delta R$ correction, additional event selections are required:
-
-\begin{itemize}
-\item $p_T > 12 \text{ GeV}$ for both muons, to make sure $\varepsilon_{\text{muX}}$ is at the plateau to get rid of single muon effect.
-\item Events un-prescaled with respect to the di-muon trigger.
-\end{itemize} 
-
-The ratio $\rho_{\Delta R}$ is defined as
+Define the ratio $\rho_{\Delta R}$ as:
 
 \begin{equation}
-\rho_{\Delta R}(\Delta R, |y^{\mu\mu}|) = \dfrac{N(\text{tagged + accepted by \texttt{HLT\_2mu10\_bJpsimumu}})}{N(\text{tagged by \texttt{HLT\_mu10\_bJpsi\_TrkPEB}})},
+\rho_{\Delta R}(\Delta R, |y^{\mu\mu}|) = \dfrac{N_{J/\psi}(\text{\texttt{HLT\_mu10\_bJpsi\_TrkPEB} \&\& \texttt{HLT\_2mu10\_bJpsimumu}})}{N_{J/\psi}(\text{\texttt{HLT\_mu10\_bJpsi\_TrkPEB}})},
 \end{equation}
 
-where the number of candidates in each $(\Delta R, |y^\mu\mu|)$ bin is obtained by fitting to the di-muon invariant mass distribution.
-An example is shown in Figure~\ref{fig:fit_example}.
-
-\begin{figure}[h]
-\center
-\includegraphics[width=12cm,height=8.28cm]{fit_example.eps} 
-\caption{An example of the unbinned maximum likelihood fit to the di-muon invariant mass distribution
-  to extract the number of candidates in the bin $0.14< \Delta R < 0.16$ and $1.2 < |y^{\mu\mu}| < 2.4$.
-  The fit function consists of a Gaussian plus one-sided Crystal-Ball signal and an exponential background.
-  The red (blue) curve is the fit to candidates accepted (rejected) by the di-muon trigger.}
-\label{fig:fit_example}
-\end{figure}
-
-$\rho_{\Delta R}$ is fitted against $\Delta R$ with an error function with a normalization 
+where the two muons are required to have $p_T > 12 \text{ GeV}$ to ensure that the \texttt{mu10}  efficiency is in the plateau region to get rid of single muon effect. The $\rho_{\Delta R}$ ratio is fitted as a function of $\Delta R$ using an error function with a turn-on parameter $\sigma$ and normalization factor $N$ in the three rapidity regions:
 
 \begin{equation}
-f(x;p_0,p_1,p_2) = p_2\text{Erf}[(x+p_0)/p_1]
+f(\Delta R;N,\sigma) = N\text{Erf}(\Delta R/\sigma)
 \end{equation}
 
-in three rapidity $|y^{\mu\mu}|$ regions: barrel ($0 < |y^{\mu\mu}| < 1.05$), overlap ($1.05 < |y^{\mu\mu}| < 1.2$)
-and endcap ($1.2 < |y^{\mu\mu}| < 2.4$). The result of the fits are shown in Figure~\ref{fig:fit_rho_dr}.
+The fits are shown in Fig.~\ref{fig:fit_rho_dr}. The true correction $c_{\Delta R}$ is obtained by removing the normalisation $N$, thereby isolating the dependence on $\Delta R$.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \center
 \hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} \\
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_Data18AllYear.eps} \\
 \hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_undefined_periodMC16e.eps} 
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_undefined_periodMC16e} 
-\includegraphics[width=0.33\textwidth]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_undefined_periodMC16e} 
-\caption{$\rho_{\Delta R}$ fits for \texttt{HLT\_2mu10\_bJpsimumu} in data18 (top) and MC16e (bottom)
-  in the three $|y^{\mu\mu}|$ regions. The red line is the fit to the data points, and
-  the green area is the uncertainty of the fit.}
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Barrel_HLT_2mu10_bJpsimumu_undefined_period.eps} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Overlap_HLT_2mu10_bJpsimumu_undefined_period} 
+\includegraphics[width=0.32\textwidth]{htg_efficiency_Endcap_HLT_2mu10_bJpsimumu_undefined_period} 
+\caption{$\rho_{\Delta R}$ fits for \texttt{HLT\_2mu10\_bJpsimumu} in data18 (top) and MC16e (bottom) across the three rapidity $|y^{\mu\mu}|$ regions. The red line represents the error function fit $f(\Delta R;N,\sigma) = N\text{Erf}(\Delta R/\sigma)$, while the green band indicates the 1-sigma fit uncertainty. The fitted turn-on parameter $\sigma$ and normalization $N$ are also shown.}
 \label{fig:fit_rho_dr}
 \end{figure}
 
-The true correction $c_{\Delta R}$ is extracted from the fit by removing the overall normalisation.
-For $\Delta R$ smaller than the shift, $c_{\Delta R}$ is manually set to a value close to zero.
-As $c_{\Delta R}$ is independent of the $p_T$ thresholds of the legs due to the additional event selection,
-it is practical to extract $c_{\Delta R}$ only from \texttt{HLT\_2mu10\_bJpsimumu}
-and apply it to all other di-muon triggers.
-Figure~\ref{fig:c_delta_dr} shows the $c_{\Delta R}$ curves of \texttt{HLT\_2mu10\_bJpsimumu}
-and \texttt{HLT\_mu11\_mu6\_bJpsimumu}. The curves of the two triggers agree very well.
-
-\begin{figure}[h]
-\center
-\hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_Data18_Barrel.eps} 
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_Data18_Overlap.eps} 
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_Data18_Endcap.eps} \\
-\hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_MC16e_Barrel.eps} 
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_MC16e_Overlap.eps} 
-\includegraphics[width=0.33\textwidth]{c_dr_pT_thresholds_compare_MC16e_Endcap.eps} 
-\caption{$c_{\Delta R}$ of \texttt{HLT\_2mu10\_bJpsimumu} and \texttt{HLT\_mu11\_mu6\_bJpsimumu} in data18 (top) and MC16e (bottom) in the three $|y^{\mu\mu}|$ regions.}
-\label{fig:c_delta_dr}
-\end{figure}
-
-
-\subsubsection{Asymptotic correction}
-
-The asymptotic correction $c_a$ is obtained by using an auxiliary di-muon trigger
-with no vertex and opposite charge requirements, that is
+The same tag-and-probe muon pairs used to extract $c_{\Delta R}$ are also employed to determine the single muon trigger efficiency. The single efficiency $\varepsilon_{\text{muX}}$ of the single muon trigger with $p_T$ threshold $X$~GeV is obtained by first computing the ratio:
 
 \begin{equation}
-c_a(|y^{\mu\mu}|) = \dfrac{N(\text{accepted by \texttt{HLT\_mu11\_mu6\_bJpsimumu}})}{N(\text{accepted by \texttt{HLT\_mu11\_mu6\_bDimu\_novtx\_noos}})}
+  \rho_{J/ \psi}(p^{\text{probe}}_T, q\cdot \eta^{\text{probe}}, \Delta R, |y^{\mu\mu}|)
+  = \dfrac{N_{J/ \psi}(\text{\texttt{muX} tagged \&\& \texttt{2muX} di-muon trigger})}{N_{J/ \psi}(\text{\texttt{muX} tagged})}
+\label{eq:rho_jpsi}
 \end{equation}
 
-The following selections are applied:
-
-\begin{itemize}
-\item Baseline $p_T$ selection for the muons, depending on the $p_T$ thresholds of the di-muon trigger
-\item Events un-prescaled with respect to the di-muon trigger
-\end{itemize} 
-
-$c_a$ saturates quickly against $\Delta R$, hence it is extracted by fitting with a constant.
-In 2017-18, \texttt{HLT\_mu11\_mu6\_bDimu\_novtx\_noos} is the only available trigger
-with no vertex+OS requirement. Similar to $c_{\Delta R}$, $c_a$ should not depend
-on the $p_T$ thresholds of the di-muon trigger, and also $c_a$ is very close to one,
-hence $c_a$ from \texttt{HLT\_mu11\_mu6\_bJpsimumu} is applied to all other triggers.
-The results of the fit are shown in Figure~\ref{fig:fit_c_a}.
-
-\begin{figure}[h]
-\center
-\hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_data18_Barrel.eps} 
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_data18_Overlap.eps} 
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_data18_Endcap.eps} \\
-\hspace{-0.1cm}
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_mc16e_Barrel.eps} 
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_mc16e_Overlap.eps} 
-\includegraphics[width=0.33\textwidth]{plots_fit_c_a_mc16e_Endcap.eps} 
-\caption{$\rho_{\Delta R}$ fits for \texttt{HLT\_2mu10\_bJpsimumu} in data18 (top)
-  and MC16e (bottom) in the three $|y^{\mu\mu}|$ regions. The red line is the fit
-  to the data points, and the green area is the uncertainty of the fit.}
-\label{fig:fit_c_a}
-\end{figure}
-
-
-\subsubsection{Single muon efficiency}
-
-The single muon efficiency is obtained using the same method as Run 1.
-To extract, for example, the single muon efficiency of \texttt{HLT\_mu10\_nomucomb}, we first obtain the ratio:
+This ratio is then weighted by the the inverse of the overall di-muon correction to isolate the single muon efficiency:
 
 \begin{equation}
-  \rho_{J/ \psi}(p^{\text{probe}}_T, q\eta^{\text{probe}}, \Delta R, |y^{\mu\mu}|)
-  = \dfrac{N(\text{tagged + accepted by \texttt{HLT\_2mu10\_bJpsimumu}})}{N(\text{tagged by \texttt{HLT\_mu10\_bJpsi\_TrkPEB}})}
+\varepsilon_{\text{muX}}(p_T, q\cdot\eta) = \dfrac{\rho_{J/ \psi}(p_T, q\cdot\eta, \Delta R, |y^{\mu\mu}|)}{c_{\Delta R}(\Delta R, |y^{\mu\mu}|)\times c_a(|y^{\mu\mu}|)}
 \end{equation}
 
-The single muon efficiency can then be extracted by weighting $\rho_{J/ \psi}$
-by the reciprocal of the di-muon correction $c_{\mu\mu}$:
-
-\begin{equation}
-\varepsilon_{\text{mu10}}(p_T, q\eta) = \dfrac{\rho_{J/ \psi}(p_T, q\eta, \Delta R, |y^{\mu\mu}|)}{c_{\mu\mu}(\Delta R, |y^{\mu\mu}|)}
-\end{equation}
-
-In 2018, un-prescaled, non-L1topo and symmetric \texttt{2mu6} triggers are not available.
-Hence, $\varepsilon_{\text{mu6}}$ can only be obtained from asymmetric
-\texttt{HLT\_mu11\_mu6\_bJpsimumu} trigger. However, it is difficult to determine whether
-the probe muon matches to the mu11 leg or the mu6 leg.
-To increase the chance that the tag muon is accepted by the mu11 leg and the probe muon
-is matched to the mu6 leg, the following selections are added:
-
-\begin{itemize}
-\item Tag muon matched to \texttt{HLT\_mu10\_bJpsi\_TrkPEB} and tag $p_T > 11 \text{ GeV}$
-\item For probe $p_T < 11 \text{ GeV}$, the probe muon should be simultaneously accepted
-  or rejected by both \texttt{HLT\_mu6\_nomucomb} and \texttt{HLT\_mu11\_mu6\_bJpsimumu}
-\end{itemize} 
-
-Figure~\ref{fig:Run1_singlemueffmap} shows the 2D maps of efficiency in terms of $p_T$ and $q\eta$. 
+However, in 2018, un-prescaled and symmetric \texttt{2mu6} di-muon triggers without additional topological selections were not available to select the events in the numerator of formula \ref{eq:rho_jpsi}. As a result, the $\varepsilon_{\text{mu6}}$ efficiency could only be extracted using the asymmetric
+\texttt{HLT\_mu11\_mu6\_bJpsimumu} trigger. Furthermore, the available tag trigger with the highest $p_T$ threshold was \texttt{HLT\_mu10\_bJpsi\_TrkPEB}. To ensure reliable extraction of $\varepsilon_{\text{mu6}}$, all tag muons are required to have $p_T > 11$~GeV. Moreover, for events with probe muon $p_T < 11$~GeV and rejected by \texttt{HLT\_mu11\_mu6\_bJpsimumu}, only those where the probe muon is rejected by \texttt{HLT\_mu6\_nomucomb} are retained. This helps remove cases where the rejection of \texttt{HLT\_mu11\_mu6\_bJpsimumu} is due to the tag muon failing the \texttt{mu11} leg while the probe muon passes the \texttt{mu6} leg. Without this cut, the single efficiency would be significantly underestimated. Fig.~\ref{fig:Run1_singlemueffmap} shows the 2D maps of \texttt{mu6} efficiency as a function of  $p_T$ and $q \cdot \eta$. Significant drops in efficiency can be observed near $|\eta|\approx 1.0$ (barrel-endcap transition region) and $|\eta| \approx 0$ (central crack).
 
 
-\begin{figure}[h]
-\center
+\begin{figure}[h!]
+\centering
 \hspace{-0.5cm}
-\includegraphics[width=0.5\textwidth]{Run1_data18_mu6.eps} 
-\includegraphics[width=0.5\textwidth]{Run1_MC16e_mu6.eps} 
-\caption{The maps of single muon efficiency of \texttt{HLT\_mu6\_nomucomb} extracted by
-  the Run-1 method using \texttt{HLT\_mu11\_mu6\_bJpsimumu} as the di-muon trigger.}
+\includegraphics[width=0.5\textwidth]{Run1_data18_mu6.eps}
+\includegraphics[width=0.5\textwidth]{Run1_MC16e_mu6.eps}
+\vspace{-0.2cm}
+\hspace{-0.5cm}
+\makebox[0.5\textwidth][c]{(a)}
+\makebox[0.5\textwidth][c]{(b)}
+
+\caption{The \texttt{mu6} single muon efficiency as a function of $p_T$ and $q\cdot \eta$ in (a) data18  (b) MC16e.}
 \label{fig:Run1_singlemueffmap}
+\end{figure}
+
+The track-associated scale factor $\text{SF}_{\text{trk}}$ is determined using high-$q^2$ $B^0_d \to K^{*0}J/\psi(\mu^+\mu^-)$ and $B^0_d \to K^{*0}\mu^+\mu^-$ data and MC samples:
+
+\begin{equation}
+\text{SF}_{\text{trk}} = \dfrac{\varepsilon^{\text{data}}_{\text{trk}}}{\varepsilon^{\text{MC}}_{\text{trk}}},
+\end{equation}
+
+where the track selection efficiency $\varepsilon_{\text{trk}}$ is obtained from the fraction of $B^0_d$ candidates that pass both the \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} and \texttt{HLT\_mu11\_mu6\_bDimu} triggers among those required to pass only \texttt{HLT\_mu11\_mu6\_bDimu}, as a function of di-track $p_T$:
+
+\begin{equation}
+\varepsilon_{\text{trk}}(p_T^{tt}) = \dfrac{N_{B^0_d}(\text{\texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} \&\& \texttt{HLT\_mu11\_mu6\_bDimu}})}{N_{B^0_d}(\text{\texttt{HLT\_mu11\_mu6\_bDimu} })}
+\end{equation}
+
+Fig.~\ref{fig:trk_eff} shows the track selection efficiencies in data18 and MC16e. The efficiency has a smaller value at low di-track $p_T$ but approaches unity as $p_T^{tt}$ increases. 
+
+\begin{figure}[h!]
+\centering
+\hspace{-0.5cm}
+\includegraphics[width=0.5\textwidth]{trackEff_data_highq2_refit_truth_tightWP.eps}
+\includegraphics[width=0.5\textwidth]{trackEff_highq2_refit_truth_tightWP.eps}
+\vspace{-0.2cm}
+\hspace{-0.5cm}
+\makebox[0.5\textwidth][c]{(a)}
+\makebox[0.5\textwidth][c]{(b)}
+
+\caption{The track selection efficiency for \texttt{HLT\_2mu6\_bBmumuxv2\_L1LFV-MU6} as a function of di-track $p_T$ in (a) data18 (b) MC16e.}
+\label{fig:trk_eff}
 \end{figure}
