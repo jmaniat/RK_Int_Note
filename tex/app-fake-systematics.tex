@@ -1,0 +1,25 @@
+%\section{Systematic Bias in Evaluation of the Faking Probabilities}
+%\label{app:fake-systematics}
+Two potential sources of systematic bias in the procedure adopted to evaluate the faking probabilities are considered: bias due to vertexing and bias due to the use of a specific decay channel. %
+Both of these potential biases can be broadly viewed as arising out of the concern that we use a specific decay channel to estimate the probabilities that a hadron fakes a lepton, and then we plan to use these probabilities for various other decay channels. %
+One of the ways in which the faking probabilities can be sensitive to the decay channel is via the procedure of vertexing. %
+In particular, when we require the tracks to be fitted to a common vertex, there might be a correlation between the probability of a successful vertex fit and the probability that a hadron track fakes a lepton. %
+This dependence is checked in MC where we can isolate the decays of interest without having to fit them to a common vertex -- using the truth-information. %
+We thus compare the faking probabilities derived with and without the vertexing procedure. %
+They are found to be consistent with each other, and no systematic uncertainty is taken to be associated with a bias due to vertexing. %
+Another way in which the use of a specific decay channel might affect the estimation of faking probabilities is via the more intrinsic aspects of a decay, such as the isolation of the track being considered or the displacement of the track being considered. %
+For example, the probability of a $K^+$ from $B^+\to J/\psi K^+$ to fake a lepton might be different than the probability of $K^+$ from  $B^0\to J/\psi K^{\ast 0}(\to K^+\pi^-)$ because the latter will be less isolated than the former owing to the additional $\pi^-$ track in the vicinity. %
+Or, the probability of a $K^+$ from the decay of a long-lived parent hadron such as $\Lambda_b^0$ might be different than the probability of a $K^+$ from $B^+\to J/\psi K^+$ due to the higher displacement of the perigee of the track formed by the former than the latter. % 
+Such dependencies might, in principle, be taken into account by parameterizing the faking probabilities in the isolation and displacement of the hadron. %
+However, we choose to directly check if such an impact is significant, and we will take the discrepancies between the faking probabilities derived using the two decay channels. %
+\figref{fig:compare-channels-for-electron-fakes} shows the faking probabilities for kaons faking electrons using two different decay channels, i.e., $B^+\to J/\psi K^+$ and $B^0\to J/\psi K^{\ast 0}(\to K^+\pi^-)$. Taking into account the statistical uncertainties, they are found to be consistent within $1\sigma$-$2\sigma$. These discrepancies are currently derived using MC samples and only for the fake electrons. %
+The estimation of such uncertainties using data for the fake electrons and using both MC and data for the fake muons is currently in progress. %
+However, the similar estimation for the faking probabilities of the pions will only be done using MC samples as we do not have two different decay channels using which we can tag the pions. %
+These discrepancies will be taken as a systematic uncertainty on the faking probabilities of the kaons and pions. %
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[page=3,width=0.45\textwidth]{figures/compare.BEEKstTruth.BJPsiKTruth.c1.pdf}
+    \includegraphics[page=4,width=0.45\textwidth]{figures/compare.BEEKstTruth.BJPsiKTruth.c1.pdf}
+    \caption{Comparison of the $K^\pm\to e^{\pm}$ faking probabilities using \BdToKStaree and \BpToKJpsiuu channels to tag the $K^\pm$}
+    \label{fig:compare-channels-for-electron-fakes}
+\end{figure}

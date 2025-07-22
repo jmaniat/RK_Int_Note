@@ -1,5 +1,5 @@
-\subsection{Electron Reconstruction}
-\label{subsec:electron_reco}
+%\subsection{Electron Reconstruction}
+%\label{subsec:electron_reco}
 The electron reconstruction in ATLAS uses a dynamic, topological cell clustering approach to improve energy measurements. The process identifies topo-clusters that correspond to electron showers in the calorimeter, followed by a track-cluster matching and a \textbf{Gaussian-Sum Filter (GSF)} refit (see \ref{subsec:gsf}) for precision. As shown in Figure~\ref{fig:gsf-emcal-electron_reco}, the reconstruction proceeds through multiple stages, including matching conversion vertices for photons and adding satellite clusters to account for Bremsstrahlung photons emitted by electrons, improving energy resolution. The final electron object (as stored in the \verb|xAOD::Electron| container) consist of a cluster built from energy deposits in the EM calorimeter (supercluster) and a matched track (or more precisely xAOD::TrackParticle). While for an \verb|xAOD::Muon| object the linked \verb|xAOD::TrackParticle| is an ID track (InDetTrackParticles container), for an \verb|xAOD::Electron| it is a GSF \verb|xAOD::TrackParticle| (\verb|GSFTrackParticles| container). Note: each electron has a GSF track, but not every GSF track is linked to an electron. The ATLAS electron reconstruction is described in detail in~\cite{ATL-PHYS-PUB-2017-022}. 
 
 \begin{figure}[!ht]

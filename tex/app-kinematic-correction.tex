@@ -1,0 +1,25 @@
+%\section{Kinematic Corrections in Fake Estimation}
+%\label{app:kinematic-corrections}
+The MC samples of a reference channel (\BdToKStarJpsi for the $R(K^\ast)$ analysis and \BdToMuMu for the \BdToMuMu analysis) are used to derive this correction. %
+Notice that a `bin-by-bin correction' approach cannot be applied since a given value of GSF $p_{\rm T}$ corresponds to multiple values of ID $p_{\rm T}$. %
+Thus, bin-by-bin corrections derived using one sample will not be applicable to another sample. %
+Rather, we adopt the following approach:
+\begin{itemize}
+    \item For each event in the reference channel, calculate the response of $p_{\rm T}$ of the two leptons:
+    \begin{align}
+        \mathcal{R}_{p^+_{\rm T}} &= \frac{p^+_{\rm T}({\rm GSF}) - p^+_{\rm T}({\rm ID})}{p^+_{\rm T}({\rm ID})}\\
+        \mathcal{R}_{p^-_{\rm T}} &= \frac{p^-_{\rm T}({\rm GSF}) - p^-_{\rm T}({\rm ID})}{p^-_{\rm T}({\rm ID})}
+    \end{align}
+    \item Choose a binning in the $3{\rm D}$ space of the $p_{\rm T}$ of the two leptons and the angular distance between the two leptons, $\Delta R$ -- where all three variables are calculated using the {\rm ID} tracks. For each bin $B$ (say indexed by $(p,q,r)$) in this $3{\rm D}$ space, compile an unordered list of $2{\rm D}$ responses $L_R(p,q,r) = \big[\big(\mathcal{R}^{i}_{p^+_{\rm T}}, \mathcal{R}^{i}_{p^-_{\rm T}}\big)\ \big\vert\  i\in B_{pqr}\big]$ -- where $i$ indexes the events in the reference channel. Correspondingly, for each bin, compile an unbinned list of weights $L_W(p,q,r)=\big[W^i=\frac{w^i}{\sum_j w^j}\ \big\vert i,j\in B_{pqr}\big]$, where $w^i$ is the weight of the event $i$ in the reference channel. 
+    \item For each event $j$ in the target sample, i.e., the sample for which we want to apply the kinematic corrections, calculate the unbinned list of corrected $p_{\rm T}$ values using the unbinned list of responses compiled in the previous step -- depending on the bin of $(p^+_{\rm T}, p^-_{\rm T}, \Delta R)$ that the event lies in. To be explicit, the list of corrected $p_{\rm T}$ of the two leptons is calculated as:
+    \begin{align}
+        p^+_{\rm T}({\rm Corrected})_{ij} &= p^+_{\rm T}({\rm ID})_j \times (1 + \mathcal{R}^{i}_{p^+_{\rm T}}(p(p^+_{\rm T}({\rm ID})_j),q(p^-_{\rm T}({\rm ID})_j),r(\Delta R({\rm ID})_j)))\\
+        p^-_{\rm T}({\rm Corrected})_{ij} &= p^-_{\rm T}({\rm ID})_j \times (1 + \mathcal{R}^{i}_{p^-_{\rm T}}(p(p^+_{\rm T}({\rm ID})_j),q(p^-_{\rm T}({\rm ID})_j),r(\Delta R({\rm ID})_j)))
+    \end{align}
+    where we use the notation $p(p^+_{\rm T}({\rm ID})_j)$ to denote the bin of $p^+_{\rm T}({\rm ID})_j$ in the $3{\rm D}$ space of $(p^+_{\rm T}, p^-_{\rm T}, \Delta R)$, and the notation of $\mathcal{R}_{p^+_{\rm T}}^i(p,q,r)$ to denote the $i^{\rm th}$ $\mathcal{R}_{p^+_{\rm T}}$ response in the list $L_R(p,q,r)$. % 
+    \item Following a similar notation, the weight associated with the $i^{\rm th}$ correction for the $j^{\rm th}$ event in the target sample is given by:
+    \begin{align}
+        W_{ij} &= W^i(p(p^+_{\rm T}({\rm ID})_j),q(p^-_{\rm T}({\rm ID})_j),r(\Delta R({\rm ID})_j))
+    \end{align}
+    \item Finally, the corrected $p_{\rm T}$s of the two leptons of the target sample are used to calculate the kinematic variables of interest, e.g., the mass of the $B$-candidate, the $p_{\rm T}$ of the $B$-candidate, etc. 
+\end{itemize}

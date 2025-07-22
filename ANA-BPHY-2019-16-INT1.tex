@@ -49,8 +49,9 @@
 \usepackage{makecell}
 \usepackage{nicefrac}
 %\usepackage{subcaption}
+%\usepackage{subcaption}
 \usepackage{comment}
-
+\usepackage{comment}
 % Package for creating list of authors and contributors to the analysis.
 \usepackage{atlascontribute}
 
@@ -163,7 +164,9 @@
 
 \subsection{Discriminating Variables}
 \input{tex/discriminatingvariables.tex}
-
+\section{Fakes Background}
+\label{sec:FakesBackground}
+\input{tex/fakeEstimation}
 %-------------------------------------------------------------------------------
 \section{Signal Characterisation and Fit Studies}
 \label{sec:signal}
@@ -247,4 +250,15 @@ The list should be printed either here or before the Table of Contents.
 \label{sec:app:gsf-emcal}
 \input{tex/app-gsf-emcal.tex}
 
+\section{Systematic Bias in Evaluation of the Faking Probabilities}
+\label{sec:app:fake-systematics}
+\input{tex/app-fake-systematics}
+
+\section{Kinematic Corrections in Fake Estimation}
+\label{sec:app:kinematic-corrections}
+\input{tex/app-kinematic-correction}
+
+\subsection{Electron Reconstruction}
+\label{sec:app:prw-math}
+\input{tex/app-prw-math}
 \end{document}
